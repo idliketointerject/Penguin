@@ -1,5 +1,5 @@
 
-#include "startgame.h"
+#include "initgame.h"
 #include "score.h"
 using namespace std;
 
@@ -7,7 +7,6 @@ using namespace std;
  
 int main(int argc, char **argv)
 {   
-	startgame game;
 
 	if(!al_init()) {
       fprintf(stderr, "failed to initialize allegro!\n");
@@ -39,8 +38,7 @@ int main(int argc, char **argv)
       return -1;
    }
 
-	game.initgame();
-
+	initgame();
    
 
    return 0;

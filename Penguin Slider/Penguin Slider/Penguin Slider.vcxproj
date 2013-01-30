@@ -70,12 +70,12 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="obstacle.cpp" />
-    <ClCompile Include="startgame.cpp" />
+    <ClCompile Include="initgame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="obstacle.h" />
-    <ClInclude Include="startgame.h" />
+    <ClInclude Include="initgame.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="menu.h" />
   </ItemGroup>
