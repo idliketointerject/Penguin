@@ -1,12 +1,11 @@
 #include "initgame.h"
 #include "obstacle.h"
+#include "penguin.h"
 #include <time.h>
 #include <stdlib.h>
 
 
-// somewhere in your initalization
-
-int random_btwn( const int min, const int max )
+int random_number( const int min, const int max )
 {
 
     int range = max - min;
@@ -18,7 +17,8 @@ int random_btwn( const int min, const int max )
 int initgame(){
 	obstacle box;
 	obstacle death;
-    
+	penguin p;
+	
 	const float FPS = 60;
 	
 	enum MYKEYS {
@@ -29,7 +29,6 @@ int initgame(){
    ALLEGRO_TIMER *timer = NULL;
    ALLEGRO_BITMAP *background = NULL;
    ALLEGRO_BITMAP *background2 = NULL;
-   ALLEGRO_BITMAP *penguin = NULL;
    ALLEGRO_BITMAP *fox = NULL;
    ALLEGRO_BITMAP *speed[60];
    ALLEGRO_SAMPLE *bgm = NULL;
@@ -89,8 +88,7 @@ int initgame(){
 
    const int bg2_w = al_get_bitmap_width(background2);
 
-   penguin = al_load_bitmap("resources/images/penguin.png");
-   if(!penguin) {
+  if(!p.bitmap) {
       fprintf(stderr, "failed to create penguin bitmap!\n");
 	  al_destroy_bitmap(background2);
 	  al_destroy_bitmap(background);
@@ -99,6 +97,7 @@ int initgame(){
       al_destroy_timer(timer);
       return -1;
    }
+
 
    fox = al_load_bitmap("resources/images/fox.png");
    if(!fox) {
@@ -110,11 +109,7 @@ int initgame(){
       al_destroy_timer(timer);
       return -1;
    }
-   //Get dimensions of penguin image and set initial position
-   const int penguin_w = al_get_bitmap_width(penguin);
-   const int penguin_h = al_get_bitmap_height(penguin);
-   float penguin_x = SCREEN_W / 20.0;
-   float penguin_y = SCREEN_H / 2.0 - penguin_h / 2.0;
+
 
    death.width = al_get_bitmap_width(fox) - 10;
    death.height = al_get_bitmap_height(fox)- 10;
@@ -133,7 +128,7 @@ int initgame(){
 		   for (i = 0; i <  60; i++){
 			   al_destroy_bitmap(speed[i]);
 		   }
-		   al_destroy_bitmap(penguin);
+		   al_destroy_bitmap(p.bitmap);
 		   al_destroy_bitmap(background2);
 		   al_destroy_bitmap(background);
            al_destroy_display(display);
@@ -158,7 +153,7 @@ int initgame(){
 		  al_draw_textf(font24,al_map_rgb(255,255,255),SCREEN_W - 8.0, SCREEN_H - 8.0, 0, "%i s.score", s.score);
 		  al_flip_display();	  
 	  }
-	  al_destroy_bitmap(penguin);
+	  al_destroy_bitmap(p.bitmap);
 	  al_destroy_bitmap(background2);
 	  al_destroy_bitmap(background);
       al_destroy_display(display);
@@ -191,43 +186,38 @@ int initgame(){
 	  //Check which keys are being held down and adjust the penguin's x and y positions each frame
 
       if(ev.type == ALLEGRO_EVENT_TIMER) {
-         if(key[KEY_UP] && penguin_y >= 8.0) {
-            penguin_y -= 8.0;
-			box.y0 = penguin_y;
-			box.width = penguin_w;
-		    box.height = penguin_h;
+         if(key[KEY_UP] && p.penguin_y >= 8.0) {
+            p.penguin_y -= 8.0;
+			box.y0 = p.penguin_y;
+			box.width = p.penguin_w;
+		    box.height = p.penguin_h;
 		
          }
  
-         if(key[KEY_DOWN] && penguin_y <= SCREEN_H - penguin_h - 6.0) {
-            penguin_y += 8.0;
-			box.y0 = penguin_y;
-			box.width = penguin_w;
-		    box.height = penguin_h;
+         if(key[KEY_DOWN] && p.penguin_y <= SCREEN_H - p.penguin_h - 6.0) {
+            p.penguin_y += 8.0;
+			box.y0 = p.penguin_y;
+			box.width = p.penguin_w;
+		    box.height = p.penguin_h;
 		
          }
  
-         if(key[KEY_LEFT] && penguin_x >= 8.0) {
-            penguin_x -= 6.0;
-			box.x0 = penguin_x;
-			box.width = penguin_w;
-		    box.height = penguin_h;
+         if(key[KEY_LEFT] && p.penguin_x >= 8.0) {
+            p.penguin_x -= 6.0;
+			box.x0 = p.penguin_x;
+			box.width = p.penguin_w;
+		    box.height = p.penguin_h;
 		
          }
  
-         if(key[KEY_RIGHT] && penguin_x <= SCREEN_W - penguin_w - 6.0) {
-            penguin_x += 6.0;
-			box.x0 = penguin_x;
-			box.width = penguin_w;
-			box.height = penguin_h;
+         if(key[KEY_RIGHT] && p.penguin_x <= SCREEN_W - p.penguin_w - 6.0) {
+            p.penguin_x += 6.0;
+			box.x0 = p.penguin_x;
+			box.width = p.penguin_w;
+			box.height = p.penguin_h;
 
          }
-		 
 
-      //if(ev.type == ALLEGRO_EVENT_TIMER) {
-		//  death.x0 += 2;
-		  //death.y0 += 2;
-	  //}
 		if(box.bounding_box_collision(box.x0,box.y0,box.width,box.height,death.x0,death.y0,death.width,death.height) == 1){			
 			 if (!death_sound){
 					printf( "Death sound not loaded!\n" ); 
@@ -299,37 +289,24 @@ int initgame(){
 		 //Use underwater background before frame 5240
 		 if(ticks < 5240){
 
-			 	   death.x0 -= 2;
+			 	   death.x0 -= 4;
 				   if(death.x0 < -140)
 					{
 						death.x0 = 700;
-						death.y0 = random_btwn(70,200);
+						death.y0 = random_number(70,280);
 					}
 
-			 //Check penguin x position and scroll screen accordingly
-			 if(penguin_x < (SCREEN_W * 1/4)){
+			 //TODO: Check to see score and then make the screen scroll faster if the score is at a certain amount. Same for the sky background.
 				background_offset -= 20.0;
-			 }
-			 else if(penguin_x < (SCREEN_W * 2/4)){
-				background_offset -= 22.0;
-			 }
-			 else if(penguin_x < (SCREEN_W * 3/4)){
-				background_offset -= 24.0;
-			 }
-			 else{
-				background_offset -= 26.0;
-			 }
-		 
+			 
 			 if(background_offset < -(bg_w / 2) +1){
 				 background_offset += (bg_w / 2);
 			 }
 
 			 al_draw_bitmap(background,background_offset,0,0);
-			 //al_draw_bitmap(penguin,penguin_x,penguin_y,0);
+			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			 al_draw_bitmap(fox,(float)(death.x0),(float)(death.y0),0);
-			 al_draw_bitmap(penguin,penguin_x,penguin_y,0);
-
-
+			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			 }
 		 //Switch to sky background
 		 else{
@@ -338,7 +315,7 @@ int initgame(){
 				background_offset += (bg2_w / 2);
 			}
 			al_draw_bitmap(background2,background_offset,0,0);
-			al_draw_bitmap(penguin,penguin_x,penguin_y,0);
+			al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			al_draw_bitmap(speed[current_image],0,0,0);
 			current_image = (current_image + 1 ) % 60;     //increment 1 frame in speed line animation
 		 }
@@ -356,7 +333,7 @@ int initgame(){
    al_destroy_sample(bgm);
    al_destroy_bitmap(background2);
    al_destroy_bitmap(background);
-   al_destroy_bitmap(penguin);
+   al_destroy_bitmap(p.bitmap);
    al_destroy_timer(timer);
    al_destroy_display(display);
    al_destroy_event_queue(event_queue);

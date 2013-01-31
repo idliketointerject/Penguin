@@ -68,6 +68,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="penguin.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="initgame.cpp" />
@@ -76,6 +77,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="initgame.h" />
+    <ClInclude Include="penguin.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="menu.h" />
   </ItemGroup>

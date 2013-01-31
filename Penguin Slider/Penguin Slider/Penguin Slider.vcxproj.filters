@@ -33,6 +33,9 @@
     <ClCompile Include="initgame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="penguin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="initgame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="penguin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
