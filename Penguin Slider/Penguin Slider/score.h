@@ -8,7 +8,7 @@ public:
 		score = 0;
 	}
 	void incrementscore(){
-		score++;
+		++score;
 	}
 	int getscore(){
 		return score;

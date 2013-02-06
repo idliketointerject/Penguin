@@ -1,0 +1,1 @@
+make sure that before you commit changes to put the last "penguin slider" folder into the depprecated code folder, and remove whatever was previously in it

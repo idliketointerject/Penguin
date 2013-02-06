@@ -33,14 +33,18 @@ int initgame(){
    ALLEGRO_BITMAP *speed[60];
    ALLEGRO_SAMPLE *bgm = NULL;
    ALLEGRO_SAMPLE *death_sound = NULL;
-   
+
    float background_offset = 0;
    int current_image = 0;
    bool key[4] = { false, false, false, false };
    bool redraw = true;
    bool doexit = false;
    volatile int ticks = 0;  //Use this to count how many frames has passed since game started
- 
+
+   al_init_font_addon();
+   al_init_ttf_addon();
+   ALLEGRO_FONT *font24 = al_load_font("escape.ttf",24,0);
+
    
    timer = al_create_timer(1.0 / FPS);
    if(!timer) {
@@ -117,12 +121,14 @@ int initgame(){
    death.y0 = 50;
 
    //load all images for speed line animation
+   scorekeeper s;
    int i;
    char path[80];
    for(i=0; i<60; i++) {
 	   sprintf(path, "resources/images/speed_%05d.png", i);
 	   speed[i] = NULL;
 	   speed[i] = al_load_bitmap(path);
+	  
 	   if(speed[i] == NULL) {
 		   printf("Error loading image");
 		   for (i = 0; i <  60; i++){
@@ -137,12 +143,8 @@ int initgame(){
 		   return -1;
 	   }
    }
-   scorekeeper s;
-   al_init_font_addon();
-   al_init_ttf_addon();
-   ALLEGRO_FONT *font24 = al_load_font("arial.ttf",24,0);
-   al_draw_textf(font24,al_map_rgb(255,255,255),SCREEN_W - 8.0, SCREEN_H - 8.0, 0, "%i s.score", s.score);
-   al_flip_display();
+
+
 
    event_queue = al_create_event_queue();
    if(!event_queue) {
@@ -183,6 +185,9 @@ int initgame(){
       ALLEGRO_EVENT ev;
       al_wait_for_event(event_queue, &ev);
  
+	  s.incrementscore();
+	  al_draw_textf(font24,al_map_rgb(255,255,255),SCREEN_W - 100, 10, 0, "%i", s.score);
+      al_flip_display();
 	  //Check which keys are being held down and adjust the penguin's x and y positions each frame
 
       if(ev.type == ALLEGRO_EVENT_TIMER) {
