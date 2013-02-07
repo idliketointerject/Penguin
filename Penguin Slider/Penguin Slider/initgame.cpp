@@ -33,7 +33,7 @@ int initgame(){
    ALLEGRO_BITMAP *speed[60];
    ALLEGRO_SAMPLE *bgm = NULL;
    ALLEGRO_SAMPLE *death_sound = NULL;
-
+   ALLEGRO_MONITOR_INFO info;
    float background_offset = 0;
    int current_image = 0;
    bool key[4] = { false, false, false, false };
@@ -60,8 +60,10 @@ int initgame(){
 	  al_destroy_timer(timer);
       return -1;
    }
-
-   display = al_create_display(SCREEN_W, SCREEN_H);
+   al_get_monitor_info(0, &info);
+	int w = info.x2 - info.x1; /* Assume this is 1366 */
+	int h = info.y2 - info.y1; /* Assume this is 768 */
+   display = al_create_display(w, h);
    if(!display) {
       fprintf(stderr, "failed to create display!\n");
 	  al_destroy_sample(bgm);
@@ -117,8 +119,8 @@ int initgame(){
 
    death.width = al_get_bitmap_width(fox) - 10;
    death.height = al_get_bitmap_height(fox)- 10;
-   death.x0 = 450;
-   death.y0 = 50;
+   death.x0 = 0;
+   death.y0 = 0;
 
    //load all images for speed line animation
    scorekeeper s;
@@ -151,9 +153,6 @@ int initgame(){
       fprintf(stderr, "failed to create event_queue!\n");
 	  for (i = 0; i <  60; i++){
 		  al_destroy_bitmap(speed[i]);
-		  s.incrementscore();
-		  al_draw_textf(font24,al_map_rgb(255,255,255),SCREEN_W - 8.0, SCREEN_H - 8.0, 0, "%i s.score", s.score);
-		  al_flip_display();	  
 	  }
 	  al_destroy_bitmap(p.bitmap);
 	  al_destroy_bitmap(background2);
@@ -185,12 +184,13 @@ int initgame(){
       ALLEGRO_EVENT ev;
       al_wait_for_event(event_queue, &ev);
  
-	  s.incrementscore();
-	  al_draw_textf(font24,al_map_rgb(255,255,255),SCREEN_W - 100, 10, 0, "%i", s.score);
-      al_flip_display();
 	  //Check which keys are being held down and adjust the penguin's x and y positions each frame
 
       if(ev.type == ALLEGRO_EVENT_TIMER) {
+		 if (ticks%60 == 0)
+		 {
+			s.incrementscore();		
+		 }
          if(key[KEY_UP] && p.penguin_y >= 8.0) {
             p.penguin_y -= 8.0;
 			box.y0 = p.penguin_y;
@@ -199,7 +199,7 @@ int initgame(){
 		
          }
  
-         if(key[KEY_DOWN] && p.penguin_y <= SCREEN_H - p.penguin_h - 6.0) {
+         if(key[KEY_DOWN] && p.penguin_y <= h - p.penguin_h - 6.0) {
             p.penguin_y += 8.0;
 			box.y0 = p.penguin_y;
 			box.width = p.penguin_w;
@@ -215,7 +215,7 @@ int initgame(){
 		
          }
  
-         if(key[KEY_RIGHT] && p.penguin_x <= SCREEN_W - p.penguin_w - 6.0) {
+         if(key[KEY_RIGHT] && p.penguin_x <= w - p.penguin_w - 6.0) {
             p.penguin_x += 6.0;
 			box.x0 = p.penguin_x;
 			box.width = p.penguin_w;
@@ -293,12 +293,16 @@ int initgame(){
 		 
 		 //Use underwater background before frame 5240
 		 if(ticks < 5240){
-
-			 	   death.x0 -= 4;
-				   if(death.x0 < -140)
+			 if(s.getscore() > 2500){
+				 death.x0 -= 8;
+			 }
+			 else
+				 death.x0 -= 4;
+			 	   //death.x0 -= 4;
+				   if(death.x0 < -100)
 					{
-						death.x0 = 700;
-						death.y0 = random_number(70,280);
+						death.x0 = w+100;
+						death.y0 = random_number(20,h-10);
 					}
 
 			 //TODO: Check to see score and then make the screen scroll faster if the score is at a certain amount. Same for the sky background.
@@ -312,6 +316,7 @@ int initgame(){
 			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			 al_draw_bitmap(fox,(float)(death.x0),(float)(death.y0),0);
 			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
+			 al_draw_textf(font24,al_map_rgb(255,255,255),w - 100, 10, 0, "%i", s.score);
 			 }
 		 //Switch to sky background
 		 else{
@@ -322,10 +327,12 @@ int initgame(){
 			al_draw_bitmap(background2,background_offset,0,0);
 			al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			al_draw_bitmap(speed[current_image],0,0,0);
+			al_draw_textf(font24,al_map_rgb(255,255,255),w - 100, 10, 0, "%i", s.score);
 			current_image = (current_image + 1 ) % 60;     //increment 1 frame in speed line animation
 		 }
  
          al_flip_display();
+		 //al_clear_to_color(al_map_rgb(0,0,0));
       }
    }
 
