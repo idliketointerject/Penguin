@@ -1,6 +1,8 @@
 #include "initgame.h"
 #include "obstacle.h"
 #include "penguin.h"
+#include "enemy.h"
+#include "bullet.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -17,7 +19,6 @@ int random_number( const int min, const int max )
 int initgame(){
 	obstacle box;
 	obstacle death;
-	penguin p;
 	
 	const float FPS = 60;
 	
@@ -70,6 +71,10 @@ int initgame(){
       al_destroy_timer(timer);
       return -1;
    }
+
+	penguin p;
+	Enemy enm;
+	Bullet tama;
 
    background = al_load_bitmap("resources/images/background.jpg");
    if(!background) {
@@ -233,7 +238,7 @@ int initgame(){
 			 al_play_sample(death_sound, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 		}
 		
- 
+		 enm.enemy_act();
          redraw = true;
 		 ticks++;
       }
@@ -315,7 +320,10 @@ int initgame(){
 			 al_draw_bitmap(background,background_offset,0,0);
 			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			 al_draw_bitmap(fox,(float)(death.x0),(float)(death.y0),0);
-			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
+			 al_draw_bitmap(tama.bitmap,tama.x0,tama.y0,0);
+			 if(enm.flag == 1){
+				al_draw_bitmap(enm.bitmap,enm.x0,enm.y0,0);
+			 }
 			 al_draw_textf(font24,al_map_rgb(255,255,255),w - 100, 10, 0, "%i", s.score);
 			 }
 		 //Switch to sky background
