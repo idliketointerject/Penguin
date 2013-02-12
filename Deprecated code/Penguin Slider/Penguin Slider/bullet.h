@@ -2,8 +2,6 @@
 #include "initgame.h"
 #include "math.h" 
 
-#define MAX_BULLETS 30
-
 class Bullet : public obstacle{
 	public:
 

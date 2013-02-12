@@ -1,7 +1,7 @@
 #include "obstacle.h"
 #include "initgame.h"
 
-#define MAX_ENEMIES 5
+#define ENEMY_MAX 30
 
 class Enemy : public obstacle{
 	public:
@@ -21,5 +21,3 @@ class Enemy : public obstacle{
 		int bullet_time;	//when enemy should start firing
 
 };
-
-void enemies_logic(Enemy enemy[]);

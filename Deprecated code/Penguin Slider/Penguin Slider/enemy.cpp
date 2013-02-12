@@ -33,10 +33,10 @@ void Enemy::enemy_act(){
 	if(flag == 1){           //check if enemy is active
 		enemy_pattern0();    //move according to pattern
 		counter++;
-		if(x0 < -50 || 1366 + 50 < x0 || y0 < -50 || 480 + 50 < y0)   //if enemy leaves screen, deactivate
+		if(x0 < -50 || 1366 + 50 < x0 || y0 < -50 || 240 + 50 < y0)   //if enemy leaves screen, deactivate
 			flag = 0;
-		//if(bullet_time == counter)   //check whether it's time to fire bullets
-		//	fire;
+		if(bullet_time == counter)   //check whether it's time to fire bullets
+			fire;
 	}
 }
 
@@ -48,9 +48,3 @@ void Enemy::fire(){
     enemy_enter();
     enemy_act();
 }*/
-
-void enemies_logic(Enemy enemy[]){
-	int i;
-	for (i=0; i<MAX_ENEMIES; i++)
-		enemy[i].enemy_act();
-}

@@ -1,8 +1,7 @@
 #include "initgame.h"
 #include "obstacle.h"
-#include "penguin.h"
-#include "enemy.h"
-#include "bullet.h"
+#include "penguin.h"s
+#include "draw.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -73,8 +72,13 @@ int initgame(){
    }
 
 	penguin p;
-	Enemy enm;
-	Bullet tama;
+	Enemy enm[MAX_ENEMIES];
+	//just for debugging
+	enm[1].y0 += 150;
+	enm[2].y0 -= 150;
+	enm[3].flag = 0;
+	enm[4].flag = 0;
+	Bullet blt[MAX_BULLETS];
 
    background = al_load_bitmap("resources/images/background.jpg");
    if(!background) {
@@ -238,8 +242,8 @@ int initgame(){
 			 al_play_sample(death_sound, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_ONCE,NULL);
 		}
 		
-		 enm.enemy_act();
-         redraw = true;
+		 enemies_logic(enm);
+		 redraw = true;
 		 ticks++;
       }
 	  
@@ -320,10 +324,8 @@ int initgame(){
 			 al_draw_bitmap(background,background_offset,0,0);
 			 al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			 al_draw_bitmap(fox,(float)(death.x0),(float)(death.y0),0);
-			 al_draw_bitmap(tama.bitmap,tama.x0,tama.y0,0);
-			 if(enm.flag == 1){
-				al_draw_bitmap(enm.bitmap,enm.x0,enm.y0,0);
-			 }
+			 draw_enemies(enm);		//draws every enemy, defined in draw.cpp
+			 draw_bullets(blt);
 			 al_draw_textf(font24,al_map_rgb(255,255,255),w - 100, 10, 0, "%i", s.score);
 			 }
 		 //Switch to sky background
@@ -335,6 +337,8 @@ int initgame(){
 			al_draw_bitmap(background2,background_offset,0,0);
 			al_draw_bitmap(p.bitmap,p.penguin_x,p.penguin_y,0);
 			al_draw_bitmap(speed[current_image],0,0,0);
+			draw_enemies(enm);		//draws every enemy, defined in draw.cpp
+			draw_bullets(blt);
 			al_draw_textf(font24,al_map_rgb(255,255,255),w - 100, 10, 0, "%i", s.score);
 			current_image = (current_image + 1 ) % 60;     //increment 1 frame in speed line animation
 		 }
@@ -357,7 +361,10 @@ int initgame(){
    al_destroy_timer(timer);
    al_destroy_display(display);
    al_destroy_event_queue(event_queue);
-
+   for (i=0; i<MAX_ENEMIES; i++)
+	   al_destroy_bitmap(enm[i].bitmap);
+   for (i=0; i<MAX_BULLETS; i++)
+	   al_destroy_bitmap(blt[i].bitmap);
    return 0;
 
 }
