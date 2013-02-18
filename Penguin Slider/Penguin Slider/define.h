@@ -1,1 +1,0 @@
-//volatile int ticks = 0;  //Use this to count how many frames has passed since game started
