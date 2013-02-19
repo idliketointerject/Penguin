@@ -40,7 +40,7 @@ int main(int argc, char **argv)
    }
     mainmenu();
 	//initgame();
-   
+
 
    return 0;
 }
