@@ -39,6 +39,13 @@ bool initializeAllegro()
 		fprintf(stderr, "failed to reserve samples!\n");
 		return false;
 	}
+
+	al_init_font_addon();
+	if( !al_init_ttf_addon())
+	{
+		fprintf(stderr, "failed to init ttf!\n");
+		return false;
+	}
 	// All Addons Successfully Installed!
 	return true;
 }

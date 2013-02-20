@@ -21,6 +21,7 @@ ALLEGRO_BITMAP * bitmapWrapper::getBitmapPointer()
 	return bitmapPointer;
 }
 
+
 bitmapWrapper::~bitmapWrapper()
 {
 	if ( bitmapPointer )

@@ -1,18 +1,6 @@
-class scorekeeper{
-public:
+#include "score.h"
 
-	scorekeeper(){
-		score = 0;
-	}
-	void incrementscore(){
-		score++;
-	}
-	int getscore(){
-		return score;
-	}
-	void setscore(int total){
-		score = total;
-	}
-private:
-	int score;
-};
+
+void scorekeeper::printScore(){
+	al_draw_textf(getFont(),al_map_rgb(255,255,255),WIDTH - 100, 10, 0, "%i", score);
+}

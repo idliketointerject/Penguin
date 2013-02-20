@@ -17,6 +17,7 @@
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="backGround.h" />
     <ClInclude Include="initAllegro.h" />
     <ClInclude Include="initgame.h" />
     <ClInclude Include="InputHandler.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="penguin.cpp" />
     <ClCompile Include="score.cpp" />
+    <ClCompile Include="backGround.cpp" />
     <ClCompile Include="wrappers.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -8,13 +8,15 @@
 #include "initAllegro.h"
 #include "InputHandler.h"
 #include "penguin.h"
+#include "backGround.h"
+#include "score.h"
 
 int main(int argc, char **argv)
 {
 	// GAME-LOOP Variables
 	bool render = false;
 	int state = PLAYING;
-	
+
 	// Here is where we Initialize Allegro
 	if (!initializeAllegro()) 
 		return -1;
@@ -24,9 +26,6 @@ int main(int argc, char **argv)
 	if (!wDisplay.verifyInitialization()) 
 		return -1;
 
-	/*/ Create Event Queue
-	eventQueueWrapper wEventQueue;
-	*/
 	// Create Input/Event Handler
 	inputHandler handler;
 	if (!handler.verifyInitialization())
@@ -41,8 +40,18 @@ int main(int argc, char **argv)
 	handler.registerSource(al_get_timer_event_source(wTimer.getTimerPointer()));
 
 	// Background Object
-	
+	bitmapWrapper backImage("resources/images/background.png");
+	if (!backImage.verifyInitialization())
+		return -1;
 
+	backGround bg;
+	bg.setImage(backImage.getBitmapPointer());
+	//bg.playMusic("resources/audio/bgm.wav");
+
+	backGround bg2;
+	bg2.setImage(backImage.getBitmapPointer());
+	bg2.setX(backImage.getBitmapWidth());
+	
 	// Game Objects;
 	//Penguin penguin;
 	bitmapWrapper penguinImage("resources/images/penguin.png");
@@ -52,12 +61,19 @@ int main(int argc, char **argv)
 
 	penguin pengii;
 	pengii.setImage(penguinImage.getBitmapPointer());
-	pengii.setSpeedX( 2.0 );
+	pengii.setSpeedX( 10.0 );
 	pengii.setSpeedY( 10.0 );
 
 	object enemies[ NUM_ENEMIES ];
 
+	// ScoreKeeper
+	scorekeeper totalScore;
+	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
+	if( !totalScore.getFont())
+		return -1;
+
 	al_start_timer(wTimer.getTimerPointer());
+	bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
 
 	while(!handler.getDone())
 	{
@@ -78,8 +94,11 @@ int main(int argc, char **argv)
 
 			if( state = PLAYING )
 			{
-				// Update BackGround
 
+				// Update BackGround
+				bg.scrollBackGround();
+				bg2.scrollBackGround();
+				totalScore.incrementscore();
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
 
@@ -110,7 +129,9 @@ int main(int argc, char **argv)
 			else if(state == PLAYING)
 			{
 				// Draw Background
-
+				bg.draw();
+				bg2.draw();
+				totalScore.printScore();
 				// Draw penguin
 				pengii.draw();
 				// Draw Enemies

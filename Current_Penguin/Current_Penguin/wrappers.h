@@ -7,6 +7,8 @@ class bitmapWrapper
 public:
 	bitmapWrapper(char * path);
 	~bitmapWrapper();
+	//need to get the width of bitmap to determine scrolling
+	int getBitmapWidth(){ return al_get_bitmap_width(getBitmapPointer());};
 	bool verifyInitialization();
 	ALLEGRO_BITMAP * getBitmapPointer();
 private:
