@@ -6,7 +6,8 @@
 class backGround: public object{
 public:
 	backGround();
-	void scrollBackGround();
+	virtual void update();
+	void draw();
 	void playMusic(char * songtitle);
  
 };

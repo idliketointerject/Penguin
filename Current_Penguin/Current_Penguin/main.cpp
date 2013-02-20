@@ -46,11 +46,9 @@ int main(int argc, char **argv)
 
 	backGround bg;
 	bg.setImage(backImage.getBitmapPointer());
+	bg.setSpeedX(3);
+	bg.setDirX(-1);
 	//bg.playMusic("resources/audio/bgm.wav");
-
-	backGround bg2;
-	bg2.setImage(backImage.getBitmapPointer());
-	bg2.setX(backImage.getBitmapWidth());
 	
 	// Game Objects;
 	//Penguin penguin;
@@ -73,7 +71,7 @@ int main(int argc, char **argv)
 		return -1;
 
 	al_start_timer(wTimer.getTimerPointer());
-	bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
+	//bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
 
 	while(!handler.getDone())
 	{
@@ -96,8 +94,7 @@ int main(int argc, char **argv)
 			{
 
 				// Update BackGround
-				bg.scrollBackGround();
-				bg2.scrollBackGround();
+				bg.update();
 				totalScore.incrementscore();
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
@@ -130,7 +127,6 @@ int main(int argc, char **argv)
 			{
 				// Draw Background
 				bg.draw();
-				bg2.draw();
 				totalScore.printScore();
 				// Draw penguin
 				pengii.draw();
