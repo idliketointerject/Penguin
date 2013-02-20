@@ -1,4 +1,5 @@
 // Base Class for on screen objects
+#pragma once
 #include "wrappers.h"
 
 

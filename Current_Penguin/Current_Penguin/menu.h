@@ -1,9 +1,10 @@
-#ifndef MENU_H
+/*#ifndef MENU_H
 #define MENU_H
-#include "initgame.h"
+//#include "initgame.h"
 
 
 	void mainmenu();
 
 
 #endif
+	*/

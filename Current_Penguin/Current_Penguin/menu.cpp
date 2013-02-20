@@ -1,4 +1,4 @@
-#include "menu.h"
+/*#include "menu.h"
 
 void mainmenu() {
 
@@ -54,8 +54,8 @@ void mainmenu() {
 
 
    al_get_monitor_info(0, &info);
-	int w = info.x2 - info.x1; /* Assume this is 1366 */
-	int h = info.y2 - info.y1; /* Assume this is 768 */
+	int w = info.x2 - info.x1; // Assume this is 1366 
+	int h = info.y2 - info.y1; // Assume this is 768 
    display = al_create_display(w, h);
    if(!display) {
       fprintf(stderr, "failed to create display!\n");
@@ -222,7 +222,7 @@ void mainmenu() {
  
    al_start_timer(timer);
  
-   /* Loop the sample until the display closes. */
+   // Loop the sample until the display closes. 
    al_play_sample(menu_bgm, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 
    int option = 0; 
@@ -384,3 +384,5 @@ void mainmenu() {
  
 return;
 }
+
+*/

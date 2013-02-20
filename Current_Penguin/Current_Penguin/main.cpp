@@ -7,12 +7,13 @@
 #include "Object.h"
 #include "initAllegro.h"
 #include "InputHandler.h"
+#include "penguin.h"
 
 int main(int argc, char **argv)
 {
 	// GAME-LOOP Variables
 	bool render = false;
-	int state = TITLE;
+	int state = PLAYING;
 	
 	// Here is where we Initialize Allegro
 	if (!initializeAllegro()) 
@@ -40,10 +41,20 @@ int main(int argc, char **argv)
 	handler.registerSource(al_get_timer_event_source(wTimer.getTimerPointer()));
 
 	// Background Object
-
+	
 
 	// Game Objects;
 	//Penguin penguin;
+	bitmapWrapper penguinImage("resources/images/penguin.png");
+
+	if(!penguinImage.verifyInitialization())
+		return -1;
+
+	penguin pengii;
+	pengii.setImage(penguinImage.getBitmapPointer());
+	pengii.setSpeedX( 2.0 );
+	pengii.setSpeedY( 10.0 );
+
 	object enemies[ NUM_ENEMIES ];
 
 	al_start_timer(wTimer.getTimerPointer());
@@ -70,6 +81,7 @@ int main(int argc, char **argv)
 				// Update BackGround
 
 				// Update/Move/doAction Penguin
+				pengii.move(handler.getKeysArray());
 
 				// here we update live objects
 				for( int i = 0; i < NUM_ENEMIES; i++ )
@@ -100,7 +112,7 @@ int main(int argc, char **argv)
 				// Draw Background
 
 				// Draw penguin
-
+				pengii.draw();
 				// Draw Enemies
 				for ( int i=0; i < NUM_ENEMIES; i++)
 				{

@@ -1,4 +1,4 @@
-#include "initgame.h"
+/*#include "initgame.h"
 #include "obstacle.h"
 #include "penguin.h"s
 #include "draw.h"
@@ -61,8 +61,8 @@ int initgame(){
       return -1;
    }
    al_get_monitor_info(0, &info);
-	int w = info.x2 - info.x1; /* Assume this is 1366 */
-	int h = info.y2 - info.y1; /* Assume this is 768 */
+	int w = info.x2 - info.x1; // Assume this is 1366 
+	int h = info.y2 - info.y1; // Assume this is 768 
    display = al_create_display(w, h);
    if(!display) {
       fprintf(stderr, "failed to create display!\n");
@@ -185,7 +185,7 @@ int initgame(){
  
    al_start_timer(timer);
  
-   /* Loop the sample until the display closes. */
+   // Loop the sample until the display closes. 
    al_play_sample(bgm, 1.0, 0.0,1.0,ALLEGRO_PLAYMODE_LOOP,NULL);
 
    while(!doexit)
@@ -368,3 +368,4 @@ int initgame(){
    return 0;
 
 }
+*/

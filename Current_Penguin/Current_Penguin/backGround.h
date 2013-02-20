@@ -1,0 +1,1 @@
+//creates background class which inherits object, and will be used to make a background object that scrolls accross the screen in main
