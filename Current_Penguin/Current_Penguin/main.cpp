@@ -13,6 +13,8 @@
 #include "screenprinter.h"
 #include "SoundManager.h"
 
+#include "draw.h"
+
 int main(int argc, char **argv)
 {
 	// GAME-LOOP Variables
@@ -84,6 +86,8 @@ int main(int argc, char **argv)
 	pengii.setBitmapWidth(penguinImage.getBitmapPointer());
 	object enemies[ NUM_ENEMIES ];
 
+	Enemy enm[NUM_ENEMIES];
+
 	// ScoreKeeper
 	scorekeeper totalScore;
 	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
@@ -130,6 +134,7 @@ int main(int argc, char **argv)
 				pengii.move(handler.getKeysArray());
 
 				// here we update live objects
+				enemies_logic(enm);
 				for( int i = 0; i < NUM_ENEMIES; i++ )
 				{
 					if (enemies[i].isAlive())
@@ -164,6 +169,7 @@ int main(int argc, char **argv)
 				// Draw penguin
 				pengii.draw();
 				// Draw Enemies
+				draw_enemies(enm);
 				for ( int i=0; i < NUM_ENEMIES; i++)
 				{
 					if( enemies[i].isAlive())

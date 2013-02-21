@@ -6,37 +6,35 @@ Enemy::Enemy(){
 	counter = 0;
 	hp = 100;
 	hp_max = hp;
-	x0 = 1366 + 20;
-	y0 = 240;
 	bullet_time = 150;
 }
 
-void Enemy::enemy_pattern0(){   //simple movement pattern where enemy comes from the right,
-    if(counter < 60)			//stops, and then goes back out through the right again.
+void Enemy::enemy_pattern0(int i){   //simple movement pattern where enemy comes from the right, stops, and then goes back out through the right again.
+	if(counter >= 20*i && counter < 60 + 20*i)			
         x0 -= 4;
-    if(counter > 60+240)
+    if(counter > 60+240 + 20*i)
         x0 += 8;
 }
 
-/**void Enemy::enemy_enter(){
-	if(ticks == 100){
-		counter = 0;
+void Enemy::enemy_enter(int i){
+	if(counter == 0){
 		hp = 100;
 		hp_max = hp;
-		x0 = 700;
-		y0 = 240;
+		x0 = WIDTH +50;
+		y0 = (HEIGHT/6) * (i + 1) - 50;
 		bullet_time = 150;
 	}
-}*/
+}
 
-void Enemy::enemy_act(){
+void Enemy::enemy_act(int i){
 	if(flag == 1){           //check if enemy is active
-		enemy_pattern0();    //move according to pattern
+		enemy_pattern0(i);    //move according to pattern
 		counter++;
-		if(x0 < -50 || 1366 + 50 < x0 || y0 < -50 || 480 + 50 < y0)   //if enemy leaves screen, deactivate
+		if(x0 < -50 || WIDTH + 50 < x0 || y0 < -50 || HEIGHT + 50 < y0){   //if enemy leaves screen, deactivate
 			flag = 0;
 		//if(bullet_time == counter)   //check whether it's time to fire bullets
 		//	fire;
+		}
 	}
 }
 
@@ -44,13 +42,9 @@ void Enemy::fire(){
 
 }
 
-/**void Enemy::enemy_main(){
-    enemy_enter();
-    enemy_act();
-}*/
-
 void enemies_logic(Enemy enemy[]){
-	int i;
-	for (i=0; i<MAX_ENEMIES; i++)
-		enemy[i].enemy_act();
+	for (int i=0; i<MAX_ENEMIES; i++){
+		enemy[i].enemy_enter(i);
+		enemy[i].enemy_act(i);
+	}
 }
