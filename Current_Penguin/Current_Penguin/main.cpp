@@ -11,6 +11,7 @@
 #include "backGround.h"
 #include "score.h"
 #include "screenprinter.h"
+#include "SoundManager.h"
 
 int main(int argc, char **argv)
 {
@@ -49,20 +50,19 @@ int main(int argc, char **argv)
 	bg.setImage(backImage.getBitmapPointer());
 	bg.setSpeedX(3);
 	bg.setDirX(-1);
-	//bg.playMusic("resources/audio/bgm.wav");
-<<<<<<< HEAD
 
-	backGround bg2;
-	bg2.setImage(backImage.getBitmapPointer());
-	bg2.setX(backImage.getBitmapWidth());
+	// Menu Object
 	bitmapWrapper menu("resources/images/menu.png");
 	if(!menu.verifyInitialization())
 		return -1;
 	backGround startMenu;
 	startMenu.setImage(menu.getBitmapPointer());
-=======
->>>>>>> a0590235d2e62c9d04939f6aefe32b5f0ab2674a
 	
+	// SoundManager
+	soundManager sManager;
+	if( !sManager.setMusic("resources/audio/bgm.wav"))
+		return -1;
+
 	// Game Objects;
 	//Penguin penguin;
 	bitmapWrapper penguinImage("resources/images/penguin.png");
@@ -83,12 +83,16 @@ int main(int argc, char **argv)
 	if( !totalScore.getFont())
 		return -1;
 
-	al_start_timer(wTimer.getTimerPointer());
-	//bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
-
+	// Screen Printer
 	screenprinter titleHelp("Escape.ttf");
 	titleHelp.setTextSize(20);
 	titleHelp.setXPos(WIDTH/2 - 100);
+
+	// Play Music
+	sManager.loopMusic();
+
+	// Starting Timer: Put Nothing between here and start of game loop!
+	al_start_timer(wTimer.getTimerPointer());
 
 	while(!handler.getDone())
 	{

@@ -1,10 +1,27 @@
 #include "wrappers.h"
 
 // bitmapWrapper functions
-bitmapWrapper::bitmapWrapper(char * path)
+bitmapWrapper::bitmapWrapper()
 {
 	bitmapPointer = NULL;
+	locked = false;
+}
+bitmapWrapper::bitmapWrapper(char * path)
+{
+	locked = false;
+	bitmapPointer = NULL;
+	setBitmap(path);
+}
+
+bool bitmapWrapper::setBitmap(char * path)
+{
+	if (locked)
+	{
+		return false;
+	}
 	bitmapPointer = al_load_bitmap(path);
+	locked = true;
+	return verifyInitialization();
 }
 
 bool bitmapWrapper::verifyInitialization()
@@ -60,12 +77,29 @@ displayWrapper::~displayWrapper()
 }
 
 //timerWrapper functions
-timerWrapper::timerWrapper(int fps)
+timerWrapper::timerWrapper()
 {
+	locked = false;
 	timerPointer = NULL;
-	timerPointer = al_create_timer( 1.0 / fps );
 }
 
+timerWrapper::timerWrapper(int fps)
+{
+	locked = false;
+	timerPointer = NULL;
+	setTimer(fps);
+}
+
+bool timerWrapper::setTimer(int fps)
+{
+	if (locked)
+	{
+		return false;
+	}
+	timerPointer = al_create_timer( 1.0 / fps);
+	locked = true;
+	return verifyInitialization();
+}
 bool timerWrapper::verifyInitialization()
 {
 	if ( ! timerPointer )
@@ -118,10 +152,28 @@ eventQueueWrapper::~eventQueueWrapper()
 }
 
 //sampleWrapper functions
+sampleWrapper::sampleWrapper()
+{
+	locked = false;
+	samplePointer = NULL;
+}
+
 sampleWrapper::sampleWrapper(char * path )
 {
+	locked = false;
 	samplePointer = NULL;
+	setSample(path);
+}
+
+bool sampleWrapper::setSample( char * path )
+{
+	if (locked)
+	{
+		return false;
+	}
 	samplePointer = al_load_sample(path);
+	locked = true;
+	return verifyInitialization();
 }
 
 bool sampleWrapper::verifyInitialization()
@@ -145,4 +197,3 @@ sampleWrapper::~sampleWrapper()
 		al_destroy_sample(samplePointer);
 	}
 }
-

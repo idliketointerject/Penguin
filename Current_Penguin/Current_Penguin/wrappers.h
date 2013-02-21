@@ -5,13 +5,16 @@
 class bitmapWrapper
 {
 public:
+	bitmapWrapper();
 	bitmapWrapper(char * path);
 	~bitmapWrapper();
+	bool setBitmap(char * path);
 	//need to get the width of bitmap to determine scrolling
 	int getBitmapWidth(){ return al_get_bitmap_width(getBitmapPointer());};
 	bool verifyInitialization();
 	ALLEGRO_BITMAP * getBitmapPointer();
 private:
+	bool locked;
 	ALLEGRO_BITMAP * bitmapPointer;
 };
 
@@ -29,11 +32,14 @@ private:
 class timerWrapper
 {
 public:
+	timerWrapper();
 	timerWrapper( int fps );
 	~timerWrapper();
+	bool setTimer(int fps);
 	bool verifyInitialization();
 	ALLEGRO_TIMER * getTimerPointer();
 private:
+	bool locked;
 	ALLEGRO_TIMER * timerPointer;
 };
 
@@ -51,14 +57,16 @@ private:
 class sampleWrapper
 {
 public:
+	sampleWrapper();
 	sampleWrapper(char * path);
 	~sampleWrapper();
+	bool setSample(char * path);
 	bool verifyInitialization();
 	ALLEGRO_SAMPLE * getSamplePointer();
 private:
+	bool locked;
 	ALLEGRO_SAMPLE * samplePointer;
 };
-
 
  
 #endif
