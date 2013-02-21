@@ -4,35 +4,24 @@
 #include "Object.h"
 #include "initAllegro.h"
 
-backGround::backGround(){
-
-	//bitmapWrapper bgimage("resources/images/background.jpg");
-	//setImage(bgimage.getBitmapPointer());
-	//object(WIDTH,0,10.0,0,-1,0,bgimage.getBitmapWidth(),0,bgimage.getBitmapPointer(),false,false);
-	/*setX(WIDTH);
-	setY(0);
-	setSpeedX(10.0);
-	setSpeedY(0);
-	setDirX(-1);
-	setDirY(0);
-	setBoundX(bgimage.getBitmapWidth());
-	setBoundY(0);
-	setImage(bgimage.getBitmapPointer());
-	setAlive(false);
-	setCollidable(false);
-	*/
+backGround::backGround()
+{
+	object::object();
 }
 
-void backGround::scrollBackGround(){
-	int scrollLimit = al_get_bitmap_width( image );
+void backGround::update()
+{
+	object::update();
+	if ( ( x + al_get_bitmap_width( image ) ) <= 0 )
+		x = 0;
+}
 
-	x--;
-	//x + scrolLimit < 0
-	if(x + scrollLimit < 0){
-		x = WIDTH;
-	}
-	scrollLimit--;
-	update();
+void backGround::draw()
+{
+	int imageWidth = al_get_bitmap_width( image );
+	object::draw();
+	if( ( x + imageWidth ) < WIDTH )
+		al_draw_bitmap(image,x+imageWidth,0,0);
 }
 
 void backGround::playMusic(char * songtitle){//this should probably be part of the object class, for obstacle noises

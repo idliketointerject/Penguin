@@ -47,7 +47,10 @@ int main(int argc, char **argv)
 
 	backGround bg;
 	bg.setImage(backImage.getBitmapPointer());
+	bg.setSpeedX(3);
+	bg.setDirX(-1);
 	//bg.playMusic("resources/audio/bgm.wav");
+<<<<<<< HEAD
 
 	backGround bg2;
 	bg2.setImage(backImage.getBitmapPointer());
@@ -57,6 +60,8 @@ int main(int argc, char **argv)
 		return -1;
 	backGround startMenu;
 	startMenu.setImage(menu.getBitmapPointer());
+=======
+>>>>>>> a0590235d2e62c9d04939f6aefe32b5f0ab2674a
 	
 	// Game Objects;
 	//Penguin penguin;
@@ -79,7 +84,7 @@ int main(int argc, char **argv)
 		return -1;
 
 	al_start_timer(wTimer.getTimerPointer());
-	bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
+	//bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
 
 	screenprinter titleHelp("Escape.ttf");
 	titleHelp.setTextSize(20);
@@ -107,8 +112,7 @@ int main(int argc, char **argv)
 			{
 
 				// Update BackGround
-				bg.scrollBackGround();
-				bg2.scrollBackGround();
+				bg.update();
 				totalScore.incrementscore();
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
@@ -144,7 +148,6 @@ int main(int argc, char **argv)
 			{
 				// Draw Background
 				bg.draw();
-				bg2.draw();
 				totalScore.printScore();
 				// Draw penguin
 				pengii.draw();
