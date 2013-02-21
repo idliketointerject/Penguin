@@ -37,6 +37,16 @@ void object::draw()
 	al_draw_bitmap(image, x, y, 0);
 }
 
+void object::drawScaled()
+{
+	al_draw_scaled_bitmap(image,0,0, getBitmapWidth(), getBitmapHeight(), x, y, WIDTH, HEIGHT, 0);
+}
+
+void object::drawYScaled()
+{
+	al_draw_scaled_bitmap(image,0,0,bitmapWidth, bitmapHeight,x,y,bitmapWidth,HEIGHT,0);
+}
+
 void object::update()
 {
 	x += speedX * dirX;

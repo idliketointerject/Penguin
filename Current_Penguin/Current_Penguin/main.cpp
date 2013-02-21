@@ -50,6 +50,8 @@ int main(int argc, char **argv)
 	bg.setImage(backImage.getBitmapPointer());
 	bg.setSpeedX(3);
 	bg.setDirX(-1);
+	bg.setBitmapHeight(backImage.getBitmapPointer());
+	bg.setBitmapWidth(backImage.getBitmapPointer());
 
 	// Menu Object
 	bitmapWrapper menu("resources/images/menu.png");
@@ -57,10 +59,14 @@ int main(int argc, char **argv)
 		return -1;
 	backGround startMenu;
 	startMenu.setImage(menu.getBitmapPointer());
+	startMenu.setBitmapHeight(menu.getBitmapPointer());
+	startMenu.setBitmapWidth(menu.getBitmapPointer());
 	
 	// SoundManager
 	soundManager sManager;
-	if( !sManager.setMusic("resources/audio/bgm.wav"))
+	if( !sManager.setBGMusic("resources/audio/bgm.wav"))
+		return -1;
+	if( !sManager.setTitleMusic("resources/audio/menu_bgm.wav"))
 		return -1;
 
 	// Game Objects;
@@ -74,7 +80,8 @@ int main(int argc, char **argv)
 	pengii.setImage(penguinImage.getBitmapPointer());
 	pengii.setSpeedX( 10.0 );
 	pengii.setSpeedY( 10.0 );
-
+	pengii.setBitmapHeight(penguinImage.getBitmapPointer());
+	pengii.setBitmapWidth(penguinImage.getBitmapPointer());
 	object enemies[ NUM_ENEMIES ];
 
 	// ScoreKeeper
@@ -89,7 +96,8 @@ int main(int argc, char **argv)
 	titleHelp.setXPos(WIDTH/2 - 100);
 
 	// Play Music
-	sManager.loopMusic();
+	//sManager.loopMusic();
+	//menuMusic.loopMusic();
 
 	// Starting Timer: Put Nothing between here and start of game loop!
 	al_start_timer(wTimer.getTimerPointer());
@@ -110,11 +118,11 @@ int main(int argc, char **argv)
 		else if(handler.doUpdate()) // UPDATE GAME
 		{
 			render = true;
-
+			sManager.update(state);
 
 			if( state == PLAYING )
 			{
-
+				
 				// Update BackGround
 				bg.update();
 				totalScore.incrementscore();
@@ -140,7 +148,7 @@ int main(int argc, char **argv)
 			if (state == TITLE)
 			{
 				// Display TitleMenu!
-				startMenu.draw();
+				startMenu.drawScaled();
 				titleHelp.printText("Press the spacebar to play!~");
 
 			}
@@ -151,7 +159,7 @@ int main(int argc, char **argv)
 			else if(state == PLAYING)
 			{
 				// Draw Background
-				bg.draw();
+				bg.drawYScaled();
 				totalScore.printScore();
 				// Draw penguin
 				pengii.draw();

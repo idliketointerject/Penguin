@@ -8,10 +8,14 @@ class soundManager
 {
 public:
 	soundManager();
-	bool setMusic(char * path);
-	void loopMusic();
-
+	bool setBGMusic(char * path);
+	bool setTitleMusic(char * path);
+	void loopBGMusic();
+	void loopTitleMusic();
+	void update(int state);
 
 private:
-	sampleWrapper Music;
+	int currentState;
+	sampleWrapper BGMusic;
+	sampleWrapper TitleMusic;
 };

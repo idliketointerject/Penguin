@@ -38,8 +38,15 @@ public:
 	void setImage(ALLEGRO_BITMAP *image) {object::image = image;}
 	void setAlive(bool alive) {object::alive = alive;}
 	void setCollidable(bool collidable) {object::collidable = collidable;}
-	
+	void setBitmapWidth( ALLEGRO_BITMAP * image){bitmapWidth = al_get_bitmap_width(image);};
+	void setBitmapHeight(ALLEGRO_BITMAP * image){bitmapHeight = al_get_bitmap_height(image);};
+	int getBitmapWidth(){return bitmapWidth;};
+	int getBitmapHeight(){return bitmapHeight;};
+	void drawScaled();
+	void drawYScaled();
 protected:
+	int bitmapWidth;
+	int bitmapHeight;
 	float x;
 	float y;
 	float speedX;

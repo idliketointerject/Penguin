@@ -9,5 +9,7 @@ public:
 	virtual void update();
 	void draw();
 	void playMusic(char * songtitle);
+	void drawScaled();
+	void drawYScaled();
  
 };

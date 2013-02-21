@@ -1,12 +1,6 @@
 #include "penguin.h"
 
 penguin::penguin(){
-
-	//bitmap = al_load_bitmap("resources/images/penguin.png");
-	//penguin_w = al_get_bitmap_width(bitmap);
-	//penguin_h = al_get_bitmap_height(bitmap);
-	//penguin_x = SCREEN_W / 20.0;
-	//penguin_y = SCREEN_H / 2.0 - penguin_h / 2.0;
 }
 
 void penguin::move(bool keys[]){
@@ -19,7 +13,7 @@ void penguin::move(bool keys[]){
 			else
 				dirY = -1;
 		else if(keys[KEY_DOWN])//need to define BoundY and BoundX as 'getbitmapwidth/height'
-			if(getY() ==HEIGHT - getBoundY())
+			if(getY() ==HEIGHT - getBitmapHeight())
 				dirY = 0;
 			else
 				dirY = 1;
@@ -33,7 +27,7 @@ void penguin::move(bool keys[]){
 			else
 				dirX = -1;
 		else if (keys[KEY_RIGHT])
-			if(getX() == WIDTH - getBoundX())
+			if(getX() == WIDTH - getBitmapWidth())
 				dirX = 0;
 			else
 				dirX = 1;

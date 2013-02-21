@@ -2,15 +2,52 @@
 
 soundManager::soundManager()
 {
+	currentState = -1;
 	al_reserve_samples(NUM_SAMPLES);
 }
 
-bool soundManager::setMusic(char * path)
+bool soundManager::setBGMusic(char * path)
 {
-	return Music.setSample(path);
+	return BGMusic.setSample(path);
 }
 
-void soundManager::loopMusic()
+bool soundManager::setTitleMusic(char * path)
 {
-	al_play_sample(Music.getSamplePointer(),1,0,1,ALLEGRO_PLAYMODE_LOOP, NULL);
+	return TitleMusic.setSample(path);
+}
+
+void soundManager::loopBGMusic()
+{
+	al_play_sample(BGMusic.getSamplePointer(),1,0,1,ALLEGRO_PLAYMODE_LOOP, NULL);
+}
+
+void soundManager::loopTitleMusic()
+{
+	al_play_sample(TitleMusic.getSamplePointer(),1,0,1,ALLEGRO_PLAYMODE_LOOP, NULL);
+}
+
+void soundManager::update(int state)
+{
+	if ( currentState == -1 )
+	{
+		loopTitleMusic();
+		currentState = TITLE;
+	}
+	else if ( state != currentState )
+	{
+		al_stop_samples();
+		currentState = state;
+		if ( state == TITLE )
+		{
+			loopTitleMusic();
+		}
+		else if ( state == PLAYING )
+		{
+			loopBGMusic();
+		}
+		else if ( state = ENDGAME )
+		{
+			//play endgame music
+		}
+	}
 }
