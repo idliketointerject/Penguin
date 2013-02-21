@@ -59,5 +59,6 @@ private:
 	ALLEGRO_SAMPLE * samplePointer;
 };
 
+
  
 #endif

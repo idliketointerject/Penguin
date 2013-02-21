@@ -63,6 +63,9 @@
     <ClInclude Include="backGround.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="screenprinter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bullet.cpp">
@@ -108,6 +111,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="backGround.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="screenprinter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

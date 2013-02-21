@@ -10,12 +10,13 @@
 #include "penguin.h"
 #include "backGround.h"
 #include "score.h"
+#include "screenprinter.h"
 
 int main(int argc, char **argv)
 {
 	// GAME-LOOP Variables
 	bool render = false;
-	int state = PLAYING;
+	int state = TITLE;
 
 	// Here is where we Initialize Allegro
 	if (!initializeAllegro()) 
@@ -51,6 +52,11 @@ int main(int argc, char **argv)
 	backGround bg2;
 	bg2.setImage(backImage.getBitmapPointer());
 	bg2.setX(backImage.getBitmapWidth());
+	bitmapWrapper menu("resources/images/menu.png");
+	if(!menu.verifyInitialization())
+		return -1;
+	backGround startMenu;
+	startMenu.setImage(menu.getBitmapPointer());
 	
 	// Game Objects;
 	//Penguin penguin;
@@ -75,6 +81,10 @@ int main(int argc, char **argv)
 	al_start_timer(wTimer.getTimerPointer());
 	bg.playMusic("resources/audio/bgm.wav");//why doesn't this work???
 
+	screenprinter titleHelp("Escape.ttf");
+	titleHelp.setTextSize(20);
+	titleHelp.setXPos(WIDTH/2 - 100);
+
 	while(!handler.getDone())
 	{
 		handler.waitForEvent();
@@ -92,7 +102,8 @@ int main(int argc, char **argv)
 		{
 			render = true;
 
-			if( state = PLAYING )
+
+			if( state == PLAYING )
 			{
 
 				// Update BackGround
@@ -121,6 +132,9 @@ int main(int argc, char **argv)
 			if (state == TITLE)
 			{
 				// Display TitleMenu!
+				startMenu.draw();
+				titleHelp.printText("Press the spacebar to play!~");
+
 			}
 			else if(state == ENDGAME)
 			{

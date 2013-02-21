@@ -145,3 +145,4 @@ sampleWrapper::~sampleWrapper()
 		al_destroy_sample(samplePointer);
 	}
 }
+
