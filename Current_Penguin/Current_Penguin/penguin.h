@@ -5,6 +5,7 @@
 class penguin: public object{
 public:
 	penguin();
+	penguin(char *bitmapPath);
 	void move(bool keys[]);
 	//ALLEGRO_BITMAP *bitmap;
     //float penguin_x;

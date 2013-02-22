@@ -11,13 +11,12 @@ object::object()
 	setDirY(0);
 	setBoundX(0);
 	setBoundY(0);
-	setImage(NULL);
 	setAlive(false);
 	setCollidable(false);
 }
 
 object::object(float x, float y, float speedX, float speedY, int dirX, int dirY, int boundX,
-	int boundY, ALLEGRO_BITMAP *image, bool alive, bool collidable)
+	int boundY, char *bitmapPath, bool alive, bool collidable)
 {
 	setX(x);
 	setY(y);
@@ -27,24 +26,46 @@ object::object(float x, float y, float speedX, float speedY, int dirX, int dirY,
 	setDirY(dirY);
 	setBoundX(boundX);
 	setBoundY(boundY);
-	setImage(image);
+	setImage(bitmapPath);
+	setValuesFromBitmap();
 	setAlive(alive);
 	setCollidable(collidable);
 }
 
+object::object(char *bitmapPath)
+{
+	setImage(bitmapPath);
+}
+
+void object::setValuesFromBitmap()
+{
+	bitmapHeight = al_get_bitmap_height(wBitmap.getBitmapPointer());
+	bitmapWidth = al_get_bitmap_width(wBitmap.getBitmapPointer());
+}
+
+bool object::setImage(char *path)
+{
+	if (wBitmap.setBitmap(path))
+	{
+		setValuesFromBitmap();
+		return true;
+	}
+	return false;
+}
+
 void object::draw()
 {
-	al_draw_bitmap(image, x, y, 0);
+	al_draw_bitmap(wBitmap.getBitmapPointer(), x, y, 0);
 }
 
 void object::drawScaled()
 {
-	al_draw_scaled_bitmap(image,0,0, getBitmapWidth(), getBitmapHeight(), x, y, WIDTH, HEIGHT, 0);
+	al_draw_scaled_bitmap(wBitmap.getBitmapPointer(),0,0, bitmapWidth, bitmapHeight, x, y, WIDTH, HEIGHT, 0);
 }
 
 void object::drawYScaled()
 {
-	al_draw_scaled_bitmap(image,0,0,bitmapWidth, bitmapHeight,x,y,bitmapWidth,HEIGHT,0);
+	al_draw_scaled_bitmap(wBitmap.getBitmapPointer(),0,0,bitmapWidth, bitmapHeight,x,y,bitmapWidth,HEIGHT,0);
 }
 
 void object::update()

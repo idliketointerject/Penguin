@@ -1,7 +1,9 @@
 #include "enemy.h"
 
 Enemy::Enemy(){
-	image = al_load_bitmap("resources/images/blowfish.png");
+	//bitmap setter line: MemoryLeak here!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// also incompatible with improved object data structure
+	//image = al_load_bitmap("resources/blowfish.png");
 	flag = 1;
 	counter = 0;
 	hp = 100;

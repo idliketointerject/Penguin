@@ -44,54 +44,40 @@ int main(int argc, char **argv)
 	handler.registerSource(al_get_timer_event_source(wTimer.getTimerPointer()));
 
 	// Background Object
-	bitmapWrapper backImage("resources/images/background.png");
-	if (!backImage.verifyInitialization())
-		return -1;
-
-	backGround bg;
-	bg.setImage(backImage.getBitmapPointer());
+	backGround bg("resources/images/background.png");
+	if (!bg.verifyBitmap())
+		return -8;
 	bg.setSpeedX(3);
 	bg.setDirX(-1);
-	bg.setBitmapHeight(backImage.getBitmapPointer());
-	bg.setBitmapWidth(backImage.getBitmapPointer());
 
 	// Menu Object
-	bitmapWrapper menu("resources/images/menu.png");
-	if(!menu.verifyInitialization())
-		return -1;
-	backGround startMenu;
-	startMenu.setImage(menu.getBitmapPointer());
-	startMenu.setBitmapHeight(menu.getBitmapPointer());
-	startMenu.setBitmapWidth(menu.getBitmapPointer());
+	backGround startMenu("resources/images/menu.png");
+	if(!startMenu.verifyBitmap())
+		return -2;
 	
 	// SoundManager
 	soundManager sManager;
 	if( !sManager.setBGMusic("resources/audio/bgm.wav"))
-		return -1;
+		return -3;
 	if( !sManager.setTitleMusic("resources/audio/menu_bgm.wav"))
-		return -1;
+		return -3;
 
 	// Game Objects;
 	//Penguin penguin;
-	bitmapWrapper penguinImage("resources/images/penguin.png");
-
-	if(!penguinImage.verifyInitialization())
-		return -1;
-
-	penguin pengii;
-	pengii.setImage(penguinImage.getBitmapPointer());
+	penguin pengii("resources/images/penguin.png");
+	if(!pengii.verifyBitmap())
+		return -4;
 	pengii.setSpeedX( 10.0 );
 	pengii.setSpeedY( 10.0 );
-	pengii.setBitmapHeight(penguinImage.getBitmapPointer());
-	pengii.setBitmapWidth(penguinImage.getBitmapPointer());
+
 	//object enemies[ NUM_ENEMIES ];
-	Enemy enm[MAX_ENEMIES];
+	//Enemy enm[MAX_ENEMIES];
 
 	// ScoreKeeper
 	scorekeeper totalScore;
 	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
 	if( !totalScore.getFont())
-		return -1;
+		return -5;
 
 	// Screen Printer
 	screenprinter titleHelp("Escape.ttf");
@@ -133,7 +119,7 @@ int main(int argc, char **argv)
 				pengii.move(handler.getKeysArray());
 
 				// here we update live objects
-				enemies_logic(enm);
+				//enemies_logic(enm);
 /*				for( int i = 0; i < NUM_ENEMIES; i++ )
 				{
 					if (enemies[i].isAlive())
@@ -168,7 +154,7 @@ int main(int argc, char **argv)
 				// Draw penguin
 				pengii.draw();
 				// Draw Enemies
-				draw_enemies(enm);
+				//draw_enemies(enm);
 /*				for ( int i=0; i < NUM_ENEMIES; i++)
 				{
 					if( enemies[i].isAlive())

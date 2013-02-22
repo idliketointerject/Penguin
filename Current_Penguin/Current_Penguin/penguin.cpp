@@ -1,6 +1,12 @@
 #include "penguin.h"
 
 penguin::penguin(){
+	object::object();
+}
+
+penguin::penguin(char *bitmapPath)
+{
+	setImage(bitmapPath);
 }
 
 void penguin::move(bool keys[]){
@@ -13,7 +19,7 @@ void penguin::move(bool keys[]){
 			else
 				dirY = -1;
 		else if(keys[KEY_DOWN])//need to define BoundY and BoundX as 'getbitmapwidth/height'
-			if(getY() ==HEIGHT - getBitmapHeight())
+			if(getY() == HEIGHT - bitmapHeight)
 				dirY = 0;
 			else
 				dirY = 1;
@@ -27,10 +33,10 @@ void penguin::move(bool keys[]){
 			else
 				dirX = -1;
 		else if (keys[KEY_RIGHT])
-			if(getX() == WIDTH - getBitmapWidth())
+			if(getX() == WIDTH - bitmapWidth)
 				dirX = 0;
 			else
 				dirX = 1;
 		else dirX = 0;
-	this->update();
+	update();
 }

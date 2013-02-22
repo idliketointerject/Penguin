@@ -9,11 +9,16 @@ public:
 	// Constructors
 	object();
 	object(float x, float y, float speedX, float speedY, int dirX, int dirY, int boundX,
-		int boundY, ALLEGRO_BITMAP *image, bool alive, bool collidable);
+		int boundY, char * bitmapPath, bool alive, bool collidable);
+	object(char * bitmapPath);
 	
 	// Other Functions
 	void draw();
 	virtual void update();
+	void drawScaled();
+	void drawYScaled();
+
+	void setValuesFromBitmap();
 
 	// Getters/Setters
 	float getX() {return x;}
@@ -24,9 +29,10 @@ public:
 	int getDirY() {return dirY;}
 	int getBoundX() {return boundX;}
 	int getBoundY() {return boundY;}
-	ALLEGRO_BITMAP * getImage() {return image;}
+	ALLEGRO_BITMAP * getImage() {return wBitmap.getBitmapPointer();}
 	bool isAlive() {return alive;}
 	bool isCollidable() {return collidable;}
+	bool setImage(char *path);
 	void setX(float x) {object::x = x;}
 	void setY(float y) {object::y = y;}
 	void setSpeedX(float speedX) {object::speedX = speedX;}
@@ -35,15 +41,12 @@ public:
 	void setDirY(int dirY) {object::dirY = dirY;}
 	void setBoundX(int boundX) {object::boundX = boundX;}
 	void setBoundY(int boundY) {object::boundY = boundY;}
-	void setImage(ALLEGRO_BITMAP *image) {object::image = image;}
 	void setAlive(bool alive) {object::alive = alive;}
 	void setCollidable(bool collidable) {object::collidable = collidable;}
-	void setBitmapWidth( ALLEGRO_BITMAP * image){bitmapWidth = al_get_bitmap_width(image);};
-	void setBitmapHeight(ALLEGRO_BITMAP * image){bitmapHeight = al_get_bitmap_height(image);};
-	int getBitmapWidth(){return bitmapWidth;};
-	int getBitmapHeight(){return bitmapHeight;};
-	void drawScaled();
-	void drawYScaled();
+	int getBitmapWidth(){return bitmapWidth;}
+	int getBitmapHeight(){return bitmapHeight;}
+	bool verifyBitmap() {return wBitmap.verifyInitialization();}
+
 protected:
 	int bitmapWidth;
 	int bitmapHeight;
@@ -55,7 +58,7 @@ protected:
 	int dirY;
 	int boundX;
 	int boundY;
-	ALLEGRO_BITMAP *image;
+	bitmapWrapper wBitmap;
 private:
 	bool alive;
 	bool collidable;
