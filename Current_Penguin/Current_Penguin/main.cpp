@@ -84,9 +84,8 @@ int main(int argc, char **argv)
 	pengii.setSpeedY( 10.0 );
 	pengii.setBitmapHeight(penguinImage.getBitmapPointer());
 	pengii.setBitmapWidth(penguinImage.getBitmapPointer());
-	object enemies[ NUM_ENEMIES ];
-
-	Enemy enm[NUM_ENEMIES];
+	//object enemies[ NUM_ENEMIES ];
+	Enemy enm[MAX_ENEMIES];
 
 	// ScoreKeeper
 	scorekeeper totalScore;
@@ -135,13 +134,13 @@ int main(int argc, char **argv)
 
 				// here we update live objects
 				enemies_logic(enm);
-				for( int i = 0; i < NUM_ENEMIES; i++ )
+/*				for( int i = 0; i < NUM_ENEMIES; i++ )
 				{
 					if (enemies[i].isAlive())
 					{
 						enemies[i].update();
 					}
-				}
+				}*/
 
 				// Check/Handle Collisions
 			}
@@ -170,13 +169,13 @@ int main(int argc, char **argv)
 				pengii.draw();
 				// Draw Enemies
 				draw_enemies(enm);
-				for ( int i=0; i < NUM_ENEMIES; i++)
+/*				for ( int i=0; i < NUM_ENEMIES; i++)
 				{
 					if( enemies[i].isAlive())
 					{
 						enemies[i].draw();
 					}
-				}
+				}*/
 			}
 
 			// Flip buffers
