@@ -1,14 +1,18 @@
-#ifndef OBSTACLE_H
-#define OBSTACLE_H
+#pragma once
+#include "Object.h"
+#include "Utility.h"
 
-class obstacle{
+class obstacle: public object
+{
 public:
+	obstacle();
+	obstacle(char * bitmapPath);
 
-	int bounding_box_collision(int b1_x, int b1_y, int b1_w, int b1_h, int b2_x, int b2_y, int b2_w, int b2_h);
-	int x0;
-	int width;
-	int height;
-	int y0;
-	//nothing yet
+	void randYSpawn(int speed);
+	virtual void update();
+
+	void setSpawnConstant(int value);
+	int getSpawnConstant() {return spawnConstant;}
+private:
+	int spawnConstant; // this must be >= 1: gives a 1 in spawnConstant chance of spawning
 };
-#endif

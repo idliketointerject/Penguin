@@ -19,6 +19,7 @@ public:
 	void drawYScaled();
 
 	void setValuesFromBitmap();
+	void initAllToZero();
 
 	// Getters/Setters
 	float getX() {return x;}

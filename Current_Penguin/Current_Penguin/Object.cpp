@@ -3,16 +3,7 @@
 //Constructors
 object::object()
 {
-	setX(0);
-	setY(0);
-	setSpeedX(0);
-	setSpeedY(0);
-	setDirX(0);
-	setDirY(0);
-	setBoundX(0);
-	setBoundY(0);
-	setAlive(false);
-	setCollidable(false);
+	initAllToZero();
 }
 
 object::object(float x, float y, float speedX, float speedY, int dirX, int dirY, int boundX,
@@ -34,7 +25,22 @@ object::object(float x, float y, float speedX, float speedY, int dirX, int dirY,
 
 object::object(char *bitmapPath)
 {
+	initAllToZero();
 	setImage(bitmapPath);
+}
+
+void object::initAllToZero()
+{
+	setX(0);
+	setY(0);
+	setSpeedX(0);
+	setSpeedY(0);
+	setDirX(0);
+	setDirY(0);
+	setBoundX(0);
+	setBoundY(0);
+	setAlive(false);
+	setCollidable(false);
 }
 
 void object::setValuesFromBitmap()

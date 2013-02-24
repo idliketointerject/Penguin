@@ -14,3 +14,4 @@ enum STATE { TITLE, PLAYING, ENDGAME };
 
 // Game Constants
 const int NUM_ENEMIES = 5;
+const int NUM_OBSTACLES = 10;

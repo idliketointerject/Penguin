@@ -1,4 +1,3 @@
-
 // Penguin Game
 
 // Imports
@@ -12,6 +11,7 @@
 #include "score.h"
 #include "screenprinter.h"
 #include "SoundManager.h"
+#include "ObstacleHandler.h"
 
 #include "draw.h"
 
@@ -73,6 +73,11 @@ int main(int argc, char **argv)
 	//object enemies[ NUM_ENEMIES ];
 	//Enemy enm[MAX_ENEMIES];
 
+	// Obstacles
+	obstacleHandler obstacHandler("resources/images/mine.png");
+	if(!obstacHandler.verifyBitmaps())
+		return -9;
+
 	// ScoreKeeper
 	scorekeeper totalScore;
 	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
@@ -118,15 +123,10 @@ int main(int argc, char **argv)
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
 
-				// here we update live objects
+				// here we update/spawn obstacles
+				obstacHandler.update();
 				//enemies_logic(enm);
-/*				for( int i = 0; i < NUM_ENEMIES; i++ )
-				{
-					if (enemies[i].isAlive())
-					{
-						enemies[i].update();
-					}
-				}*/
+				
 
 				// Check/Handle Collisions
 			}
@@ -153,15 +153,11 @@ int main(int argc, char **argv)
 				totalScore.printScore();
 				// Draw penguin
 				pengii.draw();
+				// Draw Obstacles
+				obstacHandler.draw();
 				// Draw Enemies
 				//draw_enemies(enm);
-/*				for ( int i=0; i < NUM_ENEMIES; i++)
-				{
-					if( enemies[i].isAlive())
-					{
-						enemies[i].draw();
-					}
-				}*/
+				
 			}
 
 			// Flip buffers

@@ -23,10 +23,12 @@
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="obstacle.cpp" />
+    <ClCompile Include="ObstacleHandler.cpp" />
     <ClCompile Include="penguin.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="screenprinter.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="wrappers.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -43,10 +45,12 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="obstacle.h" />
+    <ClInclude Include="ObstacleHandler.h" />
     <ClInclude Include="penguin.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="screenprinter.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="wrappers.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -80,6 +84,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -92,11 +98,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>ALLEGRO_STATICLINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>allegro-5.0.8-monolith-static-mt.lib;dumb-0.9.3-static-mt.lib;freetype-2.4.8-static-mt.lib;libFLAC-1.2.1-static-mt.lib;libogg-1.2.1-static-mt.lib;libvorbis-1.3.2-static-mt.lib;libvorbisfile-1.3.2-static-mt.lib;openal-1.14-static-mt.lib;zlib-1.2.5-static-mt.lib;winmm.lib;opengl32.lib;gdiplus.lib;psapi.lib;shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,3 +1,4 @@
+/*
 #include "draw.h"
 
 void draw_enemies(Enemy enemy[]){
@@ -13,3 +14,4 @@ void draw_bullets(Bullet bullet[]){
 			al_draw_bitmap(bullet[i].bitmap, bullet[i].x0, bullet[i].y0, 0);
 	}
 }
+*/
