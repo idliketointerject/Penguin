@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	
 	// SoundManager
 	soundManager sManager;
-	if( !sManager.setBGMusic("resources/audio/bgm.wav"))
+	if( !sManager.setBGMusic("resources/audio/bgm1.wav"))
 		return -3;
 	if( !sManager.setTitleMusic("resources/audio/menu_bgm.wav"))
 		return -3;
@@ -72,8 +72,12 @@ int main(int argc, char **argv)
 	pengii.setCollidable(true);
 	pengii.setAlive(true);
 
-	//object enemies[ NUM_ENEMIES ];
-	//Enemy enm[MAX_ENEMIES];
+	Enemy enm[MAX_ENEMIES];
+	for (int i=0; i < MAX_ENEMIES; i++)
+	{
+		if(!enm[i].verifyBitmap())
+			return -4;
+	}
 
 	// Obstacles
 	obstacleHandler obstacHandler("resources/images/mine.png");
@@ -129,7 +133,7 @@ int main(int argc, char **argv)
 
 				// here we update/spawn obstacles
 				obstacHandler.update();
-				//enemies_logic(enm);
+				enemies_logic(enm);
 				
 
 
@@ -160,8 +164,10 @@ int main(int argc, char **argv)
 				// Draw Obstacles
 				obstacHandler.draw();
 				// Draw Enemies
-				//draw_enemies(enm);
-				
+				for (int i=0; i<MAX_ENEMIES; i++){
+					if(enm[i].flagUp() == 1)			//check which enemies are active
+						enm[i].draw();
+				}
 			}
 
 			// Flip buffers

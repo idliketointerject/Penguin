@@ -16,6 +16,9 @@ class Enemy : public object{
 		void enemy_act(int i);         //logic to call in main event loop
 		void fire();
 		int flagUp(){return flag;};
+		void setFlag(int n){flag = n;};
+		int getCounter(){return counter;};
+		void setCounter(int cnt){counter = cnt;};
 	private:
 		int flag;			//1 if enemy is active, 0 if not on screen. Only enemies with flag == 1 are drawn by draw_enemies()
 		int counter;		//time elapsed since enemy spawned

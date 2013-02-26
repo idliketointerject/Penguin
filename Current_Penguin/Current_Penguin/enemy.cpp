@@ -1,9 +1,7 @@
 #include "enemy.h"
 
 Enemy::Enemy(){
-	//bitmap setter line: MemoryLeak here!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// also incompatible with improved object data structure
-	//image = al_load_bitmap("resources/blowfish.png");
+	setImage("resources/images/blowfish.png");
 	flag = 1;
 	counter = 0;
 	hp = 100;
@@ -63,6 +61,10 @@ void Enemy::enemy_enter(int i){
 		//y = (HEIGHT/6) * (i + 1) - 50;
 		y = HEIGHT/2 - 50;
 		bullet_time = 150;
+		speedX = 0;
+		speedY = 0;
+		dirX = 1;
+		dirY = 1;
 	}
 }
 
@@ -84,6 +86,12 @@ void Enemy::fire(){
 }
 
 void enemies_logic(Enemy enemy[]){
+	if (enemy[4].flagUp() == 0){
+		for (int i=0; i<MAX_ENEMIES; i++){
+			enemy[i].setCounter(0);
+			enemy[i].setFlag(1);
+		}
+	}
 	for (int i=0; i<MAX_ENEMIES; i++){
 		enemy[i].enemy_enter(i);
 		enemy[i].enemy_act(i);
