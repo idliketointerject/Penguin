@@ -10,4 +10,6 @@
 #include <allegro5/allegro_acodec.h>
 #include "Globals.h"
 
+// For testing Purposes
+#include <allegro5/allegro_primitives.h>
 bool initializeAllegro();

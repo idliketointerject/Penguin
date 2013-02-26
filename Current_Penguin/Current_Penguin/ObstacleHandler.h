@@ -11,8 +11,10 @@ public:
 	obstacleHandler(char *bitmapPath);
 
 	void update();
+	bool checkCollision(object &obj);
 	void draw();
 	bool verifyBitmaps();
+	void drawBoundingBoxes();
 
 private:
 	obstacle obstacles[NUM_OBSTACLES];

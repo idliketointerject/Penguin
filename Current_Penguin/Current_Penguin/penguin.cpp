@@ -1,12 +1,13 @@
 #include "penguin.h"
 
-penguin::penguin(){
-	object::object();
+penguin::penguin() : object() 
+{
+	setCollidable(true);
 }
 
-penguin::penguin(char *bitmapPath)
+penguin::penguin(char *bitmapPath) : object(bitmapPath)
 {
-	setImage(bitmapPath);
+	setCollidable(true);
 }
 
 void penguin::move(bool keys[]){
@@ -18,14 +19,14 @@ void penguin::move(bool keys[]){
 				dirY=0;
 			else
 				dirY = -1;
-		else if(keys[KEY_DOWN])//need to define BoundY and BoundX as 'getbitmapwidth/height'
+		else if(keys[KEY_DOWN])
 			if(getY() == HEIGHT - bitmapHeight)
 				dirY = 0;
 			else
 				dirY = 1;
 		else dirY  = 0;
 		// Horizontal movement
-		if (keys[KEY_LEFT] && keys[KEY_RIGHT])//need to define boundx 
+		if (keys[KEY_LEFT] && keys[KEY_RIGHT])
 			dirX = 0;
 		else if (keys[KEY_LEFT])
 			if(getX() == 0)
@@ -39,4 +40,9 @@ void penguin::move(bool keys[]){
 				dirX = 1;
 		else dirX = 0;
 	update();
+}
+
+void penguin::collision()
+{
+	// do nothing for now. In the future may subtract lives, decrease points, etc;
 }

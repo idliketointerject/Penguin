@@ -46,6 +46,13 @@ bool initializeAllegro()
 		fprintf(stderr, "failed to init ttf!\n");
 		return false;
 	}
+
+	//for testing
+	if (!al_init_primitives_addon())
+	{
+		fprintf(stderr, "failed to init primitives!\n");
+		return false;
+	}
 	// All Addons Successfully Installed!
 	return true;
 }

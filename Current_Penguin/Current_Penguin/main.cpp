@@ -69,6 +69,8 @@ int main(int argc, char **argv)
 		return -4;
 	pengii.setSpeedX( 10.0 );
 	pengii.setSpeedY( 10.0 );
+	pengii.setCollidable(true);
+	pengii.setAlive(true);
 
 	//object enemies[ NUM_ENEMIES ];
 	//Enemy enm[MAX_ENEMIES];
@@ -120,6 +122,8 @@ int main(int argc, char **argv)
 				// Update BackGround
 				bg.update();
 				totalScore.incrementscore();
+				// Check/Handle Collisions
+				obstacHandler.checkCollision(pengii);
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
 
@@ -128,7 +132,7 @@ int main(int argc, char **argv)
 				//enemies_logic(enm);
 				
 
-				// Check/Handle Collisions
+
 			}
 		}
 

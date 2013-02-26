@@ -41,3 +41,27 @@ bool obstacleHandler::verifyBitmaps()
 	}
 	return true;
 }
+
+bool obstacleHandler::checkCollision(object &obj)
+{
+	if (!obj.isCollidable() || !obj.isAlive()) return false;
+	bool check = false;
+	for ( int i = 0; i < NUM_OBSTACLES; i++ )
+	{
+		if ( !obstacles[i].isCollidable() || !obstacles[i].isAlive() ) continue;
+		if ( obstacles[i].checkCollision(obj) )
+		{
+			check = true;
+		}
+	}
+	return check;
+}
+
+void obstacleHandler::drawBoundingBoxes()
+{
+	for( int i = 0; i < NUM_OBSTACLES; i++ )
+	{
+		if (obstacles[i].isAlive())
+			obstacles[i].drawBoundingBox();
+	}
+}

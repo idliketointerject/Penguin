@@ -7,12 +7,6 @@ public:
 	penguin();
 	penguin(char *bitmapPath);
 	void move(bool keys[]);
-	//ALLEGRO_BITMAP *bitmap;
-    //float penguin_x;
-	//float penguin_y;
-	//int penguin_w;
-	//int penguin_h;
-	//int width;
-	//int height;
+	virtual void collision();
 };
 #endif

@@ -15,8 +15,11 @@ public:
 	// Other Functions
 	void draw();
 	virtual void update();
+	virtual void collision(); // what to do when a collision occurs
 	void drawScaled();
 	void drawYScaled();
+
+	bool checkCollision(object &obj);
 
 	void setValuesFromBitmap();
 	void initAllToZero();
@@ -47,6 +50,9 @@ public:
 	int getBitmapWidth(){return bitmapWidth;}
 	int getBitmapHeight(){return bitmapHeight;}
 	bool verifyBitmap() {return wBitmap.verifyInitialization();}
+	//for testing
+	void drawBoundingBox();
+	//
 
 protected:
 	int bitmapWidth;
