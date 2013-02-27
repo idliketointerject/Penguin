@@ -80,9 +80,6 @@
     <ClInclude Include="bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="define.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>

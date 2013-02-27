@@ -15,3 +15,6 @@ enum STATE { TITLE, PLAYING, ENDGAME };
 // Game Constants
 const int NUM_ENEMIES = 5;
 const int NUM_OBSTACLES = 10;
+
+#define PI 3.1415926535898
+#define PI2 (PI*2)

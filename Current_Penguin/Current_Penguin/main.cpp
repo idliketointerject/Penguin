@@ -134,9 +134,6 @@ int main(int argc, char **argv)
 				// here we update/spawn obstacles
 				obstacHandler.update();
 				enemies_logic(enm);
-				
-
-
 			}
 		}
 

@@ -34,7 +34,6 @@
   <ItemGroup>
     <ClInclude Include="backGround.h" />
     <ClInclude Include="bullet.h" />
-    <ClInclude Include="define.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />

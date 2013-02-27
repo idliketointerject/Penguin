@@ -1,19 +1,25 @@
 #include "obstacle.h"
 #include "initgame.h"
 #include "Globals.h"
+#include "Utility.h"
 
 #define MAX_ENEMIES 5
+#define ENEMY_PATTERN_MAX 9
 
 class Enemy : public object{
 	public:
-
 		Enemy();
 		void enemy_pattern0(int i);
 		void enemy_pattern1(int i);
 		void enemy_pattern2(int i);
 		void enemy_pattern3(int i);
+		void enemy_pattern4(int i);
+		void enemy_pattern5(int i);
+		void enemy_pattern6(int i);
+		void enemy_pattern7(int i);
+		void enemy_pattern8(int i);
 		void enemy_enter(int i);		//resets and initializes enemy information to spawn in a new wave
-		void enemy_act(int i);         //logic to call in main event loop
+		void enemy_act(int i, int rand);         //logic to call in main event loop
 		void fire();
 		int flagUp(){return flag;};
 		void setFlag(int n){flag = n;};
@@ -26,7 +32,10 @@ class Enemy : public object{
 		int hp_max;
 		int item;			//what item the enemy drops
 		int bullet_time;	//when enemy should start firing
-
+		double speed;
+		double angle;
 };
 
+typedef  void (Enemy::*EnemMemFn)(int i);
 void enemies_logic(Enemy enemy[]);
+double randAng(double ang);
