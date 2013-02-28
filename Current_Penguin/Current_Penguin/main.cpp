@@ -12,7 +12,7 @@
 #include "screenprinter.h"
 #include "SoundManager.h"
 #include "ObstacleHandler.h"
-
+#include "powerUpHandler.h"
 #include "draw.h"
 
 int main(int argc, char **argv)
@@ -55,6 +55,11 @@ int main(int argc, char **argv)
 	if(!startMenu.verifyBitmap())
 		return -2;
 	
+	//endgame object
+	backGround endMenu("resources/images/end.png");
+	if(!endMenu.verifyBitmap())
+		return -2;
+
 	// SoundManager
 	soundManager sManager;
 	if( !sManager.setBGMusic("resources/audio/bgm1.wav"))
@@ -84,6 +89,15 @@ int main(int argc, char **argv)
 	if(!obstacHandler.verifyBitmaps())
 		return -9;
 
+	// Health PowerUps
+	powerUpHandler healthPower("resources/images/health.png");
+	if(!healthPower.verifyBitmaps())
+		return -9;
+
+	powerUpHandler speedPower("resources/images/speed.png");
+	if(!speedPower.verifyBitmaps())
+		return -9;
+
 	// ScoreKeeper
 	scorekeeper totalScore;
 	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
@@ -94,10 +108,6 @@ int main(int argc, char **argv)
 	screenprinter titleHelp("Escape.ttf");
 	titleHelp.setTextSize(20);
 	titleHelp.setXPos(WIDTH/2 - 100);
-
-	// Play Music
-	//sManager.loopMusic();
-	//menuMusic.loopMusic();
 
 	// Starting Timer: Put Nothing between here and start of game loop!
 	al_start_timer(wTimer.getTimerPointer());
@@ -128,13 +138,16 @@ int main(int argc, char **argv)
 				totalScore.incrementscore();
 				
 				// Check/Handle Collisions
-				if(obstacHandler.checkCollision(pengii) == true)
+				if(obstacHandler.checkCollision(pengii))
 				{
 					if(pengii.getLives() <= 0)
 					{
-						state = TITLE;
+						state = ENDGAME;
 					}
 				}
+				//check powerup collisions
+				healthPower.checkHealthCollision(pengii);
+				speedPower.checkSpeedCollision(pengii);
 				
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
@@ -142,7 +155,8 @@ int main(int argc, char **argv)
 				// here we update/spawn obstacles
 				obstacHandler.update();
 				enemies_logic(enm);
-				
+				healthPower.update();
+				speedPower.update();
 
 
 			}
@@ -158,12 +172,12 @@ int main(int argc, char **argv)
 			{
 				// Display TitleMenu!
 				startMenu.drawScaled();
-				titleHelp.printText("Press the spacebar to play!~");
 
 			}
 			else if(state == ENDGAME)
 			{
 				// Display Endgame Menu
+				endMenu.drawScaled();
 			}
 			else if(state == PLAYING)
 			{
@@ -174,6 +188,8 @@ int main(int argc, char **argv)
 				pengii.draw();
 				// Draw Obstacles
 				obstacHandler.draw();
+				healthPower.draw();
+				speedPower.draw();
 				// Draw Enemies
 				for (int i=0; i<MAX_ENEMIES; i++){
 					if(enm[i].flagUp() == 1)			//check which enemies are active

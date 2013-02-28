@@ -25,6 +25,8 @@
     <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="ObstacleHandler.cpp" />
     <ClCompile Include="penguin.cpp" />
+    <ClCompile Include="powerUp.cpp" />
+    <ClCompile Include="powerUpHandler.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="screenprinter.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -34,6 +36,7 @@
   <ItemGroup>
     <ClInclude Include="backGround.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="define.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
@@ -46,6 +49,8 @@
     <ClInclude Include="obstacle.h" />
     <ClInclude Include="ObstacleHandler.h" />
     <ClInclude Include="penguin.h" />
+    <ClInclude Include="powerUp.h" />
+    <ClInclude Include="powerUpHandler.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="screenprinter.h" />
     <ClInclude Include="SoundManager.h" />
@@ -103,7 +108,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PreprocessorDefinitions>ALLEGRO_STATICLINK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>c:\allegro\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

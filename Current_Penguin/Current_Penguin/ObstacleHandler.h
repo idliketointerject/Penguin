@@ -1,6 +1,7 @@
 #pragma once
 #include "obstacle.h"
 #include "Globals.h"
+//#include "powerUp.h"
 
 // Class to handle Obstacles
 

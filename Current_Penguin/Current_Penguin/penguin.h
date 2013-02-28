@@ -7,6 +7,7 @@ public:
 	penguin();
 	penguin(char *bitmapPath);
 	void move(bool keys[]);
+	virtual void update();
 	virtual void draw();
 	virtual void collision();
 	void setLives(int lives){this->lives = lives;};

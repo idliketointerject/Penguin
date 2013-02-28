@@ -12,7 +12,7 @@ ALLEGRO_FONT* screenprinter::getFontPointer(){
 screenprinter::~screenprinter(){
 	if( fontPointer )
 	{
-		al_destroy_font(fontPointer);
+//		al_destroy_font(fontPointer);
 	}
 }
 void screenprinter::printText(char* message){
