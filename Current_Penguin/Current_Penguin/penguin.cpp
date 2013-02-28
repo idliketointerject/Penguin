@@ -3,11 +3,16 @@
 penguin::penguin() : object() 
 {
 	setCollidable(true);
+	setLives(3);
 }
 
 penguin::penguin(char *bitmapPath) : object(bitmapPath)
 {
 	setCollidable(true);
+	setLives(3);
+	lives_icon.setBitmap("resources/images/lives.png");
+	
+	
 }
 
 void penguin::move(bool keys[]){
@@ -44,5 +49,15 @@ void penguin::move(bool keys[]){
 
 void penguin::collision()
 {
-	// do nothing for now. In the future may subtract lives, decrease points, etc;
+	lives--;
+}
+
+void penguin::draw()
+{
+	// draw everything else unique to penguin
+	for(int i = 0; i < lives; i++)
+	{
+		al_draw_bitmap(lives_icon.getBitmapPointer(),al_get_bitmap_width(lives_icon.getBitmapPointer())*i, 0, 0);
+	}
+	object::draw();
 }

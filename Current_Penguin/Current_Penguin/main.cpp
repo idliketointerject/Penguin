@@ -126,16 +126,30 @@ int main(int argc, char **argv)
 				// Update BackGround
 				bg.update();
 				totalScore.incrementscore();
+				
 				// Check/Handle Collisions
-				obstacHandler.checkCollision(pengii);
+				if(obstacHandler.checkCollision(pengii) == true)
+				{
+					if(pengii.getLives() <= 0)
+					{
+						state = TITLE;
+					}
+				}
+				
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
 
 				// here we update/spawn obstacles
 				obstacHandler.update();
 				enemies_logic(enm);
+				
+
+
 			}
 		}
+
+
+
 
 		if (render && handler.isEmpty())
 		{
