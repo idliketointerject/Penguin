@@ -11,29 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="backGround.cpp" />
-    <ClCompile Include="bullet.cpp" />
-    <ClCompile Include="draw.cpp" />
-    <ClCompile Include="enemy.cpp" />
-    <ClCompile Include="game.cpp" />
-    <ClCompile Include="initAllegro.cpp" />
-    <ClCompile Include="initgame.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="menu.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="obstacle.cpp" />
-    <ClCompile Include="ObstacleHandler.cpp" />
-    <ClCompile Include="penguin.cpp" />
-    <ClCompile Include="powerUp.cpp" />
-    <ClCompile Include="powerUpHandler.cpp" />
-    <ClCompile Include="score.cpp" />
-    <ClCompile Include="screenprinter.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="wrappers.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="backGround.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="define.h" />
@@ -57,6 +34,29 @@
     <ClInclude Include="Utility.h" />
     <ClInclude Include="wrappers.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="backGround.cpp" />
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="draw.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="initAllegro.cpp" />
+    <ClCompile Include="initgame.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="obstacle.cpp" />
+    <ClCompile Include="ObstacleHandler.cpp" />
+    <ClCompile Include="penguin.cpp" />
+    <ClCompile Include="powerUp.cpp" />
+    <ClCompile Include="powerUpHandler.cpp" />
+    <ClCompile Include="score.cpp" />
+    <ClCompile Include="screenprinter.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="wrappers.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F06A8D81-5410-42B8-9654-55DBD4746136}</ProjectGuid>
     <RootNamespace>Current_Penguin</RootNamespace>
@@ -66,14 +66,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -92,12 +90,10 @@
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>c:\allegro\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>allegro-5.0.8-monolith-md-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>c:\allegro\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

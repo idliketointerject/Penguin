@@ -1,4 +1,5 @@
 #pragma once
+#include "penguin.h"
 #include "obstacle.h"
 #include "Globals.h"
 //#include "powerUp.h"
@@ -12,7 +13,7 @@ public:
 	obstacleHandler(char *bitmapPath);
 
 	void update();
-	bool checkCollision(object &obj);
+	bool checkCollision(penguin &obj);
 	void draw();
 	bool verifyBitmaps();
 	void drawBoundingBoxes();

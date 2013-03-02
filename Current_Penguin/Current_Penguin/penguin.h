@@ -10,7 +10,7 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void collision();
-	void setLives(int lives){this->lives = lives;};
+	void setLives(int lives);
 	int getLives(){return lives;};
 
 private:

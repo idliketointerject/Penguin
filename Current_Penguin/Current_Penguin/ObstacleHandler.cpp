@@ -42,7 +42,7 @@ bool obstacleHandler::verifyBitmaps()
 	return true;
 }
 
-bool obstacleHandler::checkCollision(object &obj)
+bool obstacleHandler::checkCollision(penguin &obj)
 {
 	if (!obj.isCollidable() || !obj.isAlive()) return false;
 	bool check = false;
@@ -51,6 +51,7 @@ bool obstacleHandler::checkCollision(object &obj)
 		if ( !obstacles[i].isCollidable() || !obstacles[i].isAlive() ) continue;
 		if ( obstacles[i].checkCollision(obj) )
 		{
+			obj.setLives(obj.getLives() - 1);
 			check = true;
 		}
 	}

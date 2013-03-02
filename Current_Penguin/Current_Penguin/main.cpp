@@ -137,17 +137,18 @@ int main(int argc, char **argv)
 				bg.update();
 				totalScore.incrementscore();
 				
-				// Check/Handle Collisions
-				if(obstacHandler.checkCollision(pengii))
-				{
-					if(pengii.getLives() <= 0)
-					{
-						state = ENDGAME;
-					}
-				}
+				// Check/Handle Object Collisions
+				obstacHandler.checkCollision(pengii);
+
 				//check powerup collisions
 				healthPower.checkHealthCollision(pengii);
 				speedPower.checkSpeedCollision(pengii);
+
+				// Verify that penguin still has remaining lives
+				if (pengii.getLives() <= 0 )
+				{
+					state = ENDGAME;
+				}
 				
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());

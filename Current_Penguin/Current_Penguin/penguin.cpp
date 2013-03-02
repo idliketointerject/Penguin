@@ -15,6 +15,15 @@ penguin::penguin(char *bitmapPath) : object(bitmapPath)
 	
 }
 
+void penguin::setLives(int lives)
+{
+	penguin::lives = lives;
+	if (penguin::lives < 0 )
+	{
+		penguin::lives = 0;
+	}
+}
+
 void penguin::update()
 {
 	x += speedX * dirX;
@@ -48,14 +57,7 @@ void penguin::move(bool keys[]){
 
 void penguin::collision()
 {
-	if(getLives() <= 0)
-		setLives(0);
-
-	// do nothing for now. In the future may subtract lives, decrease points, etc;
-	else{
-		int lives = getLives()-1;
-		setLives(lives);
-	}
+	// This function is what occures when any collision happens. Only those responses should go here
 	fprintf(stderr, "%i", getLives());
 }
 
