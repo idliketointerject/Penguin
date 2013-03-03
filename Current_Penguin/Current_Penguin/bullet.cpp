@@ -1,16 +1,43 @@
-/*
 #include "bullet.h"
-#include "penguin.h"
-#include "enemy.h"
 
-Bullet::Bullet(){
-	bitmap = al_load_bitmap("resources/images/bullet.png");
-	flag = 1;
-	counter = 0;
-	x0 = 700;
-	y0 = 240;
+bullet::bullet() :object()
+{
+	initAllToZero();
 }
 
-/**double Bullet::angleToPenguin(int n, penguin p, Enemy enm[]){
-	return atan2(p.penguin_y-enm[num].y0,p.penguin_x-enm[num].x0);
-}*/
+void bullet::reset(float x, float y)
+{
+	setX(x);
+	setY(y);
+	setAlive(true);
+	setCollidable(true);
+}
+
+void bullet::prepare(int dirx, int diry, float spex, float spey)
+{
+	setDirX(dirx);
+	setDirY(diry);
+	setSpeedX(spex);
+	setSpeedY(spey);
+	setAlive(true);
+	setCollidable(true);
+}
+
+void bullet::checkCollision(object &obj)
+{
+	if ( !isCollidable() || !obj.isCollidable() || !isAlive() || !obj.isAlive())
+	{
+		return;
+	}
+	if ( 
+		x < obj.getX() + obj.getBoundX() - 1 &&
+		y < obj.getY() + obj.getBoundY() - 1 &&
+		x + boundX -1 > obj.getX() &&
+		y + boundY - 1 > obj.getY() 
+	   )
+	{
+		collision();
+		obj.collision();
+		return;
+	}
+}

@@ -58,6 +58,27 @@ bool obstacleHandler::checkCollision(penguin &obj)
 	return check;
 }
 
+bool obstacleHandler::checkCollision(bullet bul[])
+{
+	bool check = false;
+	for(int i=0; i<NUM_BULLETS;i++)
+	{
+		if (bul[i].isCollidable() && bul[i].isAlive())
+		{
+			for ( int j = 0; j < NUM_OBSTACLES; j++ )
+			{
+				if ( obstacles[j].isCollidable() && obstacles[j].isAlive() )
+				if ( obstacles[j].checkBulletCollision(bul[i]) )
+				{
+					obstacles[j].setLives(obstacles[j].getLives() - 1);
+					check = true;
+				}
+			}
+		}
+	}
+	return check;
+}
+
 void obstacleHandler::drawBoundingBoxes()
 {
 	for( int i = 0; i < NUM_OBSTACLES; i++ )

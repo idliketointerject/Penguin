@@ -19,6 +19,7 @@ void obstacle::randYSpawn(int speed)
 	y = randInt(0,HEIGHT - bitmapHeight);
 	setAlive(true);
 	setCollidable(true);
+	lives = HEALTH_OBSTACLE;
 	boundX = bitmapWidth;
 	boundY = bitmapHeight;
 }
@@ -29,6 +30,10 @@ void obstacle::update()
 	{
 		object::update();
 		if ( x + bitmapWidth < 0 )
+		{
+			initAllToZero();
+		}
+		if(lives < 1)
 		{
 			initAllToZero();
 		}
@@ -48,4 +53,25 @@ void obstacle::setSpawnConstant(int value)
 	{
 		spawnConstant = value;
 	}
+}
+
+bool obstacle::checkBulletCollision(bullet &bul)
+{
+	if ( !isCollidable() || !bul.isCollidable() )
+	{
+		return false;
+	}
+	if ( 
+		x < bul.getX() + bul.getBoundX() - 1 &&
+		y < bul.getY() + bul.getBoundY() - 1 &&
+		x + boundX -1 > bul.getX() &&
+		y + boundY - 1 > bul.getY() 
+	   )
+	{
+		bulletCollision();
+		bul.collision();
+		return true;
+	}
+
+	return false;
 }

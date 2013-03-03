@@ -98,3 +98,32 @@ void powerUpHandler::checkSpeedCollision(penguin &obj)
 
 	}
 }
+
+bool powerUpHandler::checkCollision(bullet bul[])
+{
+	bool check = false;
+	for(int i=0; i<NUM_BULLETS;i++)
+	{
+		if (bul[i].isCollidable() && bul[i].isAlive())
+		{
+			for ( int j = 0; j < NUM_OBSTACLES; j++ )
+			{
+				if ( health[j].isCollidable() && health[j].isAlive() )
+				{
+					if ( health[j].checkCollision(bul[i]) )
+					{
+						check = true;
+					}
+				}
+				if ( speed[j].isCollidable() && speed[j].isAlive() )
+				{
+					if ( speed[j].checkCollision(bul[i]) )
+					{
+						check = true;
+					}
+				}
+			}
+		}
+	}
+	return check;
+}

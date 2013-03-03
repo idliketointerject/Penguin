@@ -14,6 +14,7 @@ public:
 
 	void update();
 	bool checkCollision(penguin &obj);
+	bool checkCollision(bullet bul[]);
 	void draw();
 	bool verifyBitmaps();
 	void drawBoundingBoxes();

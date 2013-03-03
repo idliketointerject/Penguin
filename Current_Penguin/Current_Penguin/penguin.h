@@ -1,6 +1,7 @@
 #ifndef PENGUIN_H
 #define PENGUIN_H
 #include "Object.h"
+#include "bullet.h"
 
 class penguin: public object{
 public:
@@ -12,10 +13,12 @@ public:
 	virtual void collision();
 	void setLives(int lives);
 	int getLives(){return lives;};
-
+	void spawnBullet();
+	void updateBullets();
+	bullet * getBulletArray() {return bullets;}
 private:
 	int lives;
+	bullet bullets[NUM_BULLETS];
 	bitmapWrapper lives_icon;
-
 };
 #endif

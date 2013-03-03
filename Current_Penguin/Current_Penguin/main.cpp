@@ -13,7 +13,7 @@
 #include "SoundManager.h"
 #include "ObstacleHandler.h"
 #include "powerUpHandler.h"
-#include "draw.h"
+#include "enemy.h"
 
 int main(int argc, char **argv)
 {
@@ -144,6 +144,11 @@ int main(int argc, char **argv)
 				healthPower.checkHealthCollision(pengii);
 				speedPower.checkSpeedCollision(pengii);
 
+				//bullet collisions check
+				obstacHandler.checkCollision(pengii.getBulletArray());
+				healthPower.checkCollision(pengii.getBulletArray());
+				speedPower.checkCollision(pengii.getBulletArray());
+
 				// Verify that penguin still has remaining lives
 				if (pengii.getLives() <= 0 )
 				{
@@ -152,6 +157,8 @@ int main(int argc, char **argv)
 				
 				// Update/Move/doAction Penguin
 				pengii.move(handler.getKeysArray());
+				if(handler.getKey(KEY_SPACE))
+					handler.setKey(KEY_SPACE, false);
 
 				// here we update/spawn obstacles
 				obstacHandler.update();

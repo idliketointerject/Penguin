@@ -1,22 +1,12 @@
-#include "obstacle.h"
-#include "initgame.h"
-#include "math.h" 
+#ifndef BULLET_H
+#define BULLET_H
+#include "Object.h"
 
-#define MAX_BULLETS 30
-
-class Bullet : public obstacle{
-	public:
-
-		Bullet();
-		ALLEGRO_BITMAP *bitmap;
-		//double angleToPenguin(int n, penguin p, Enemy enm[]);
-		int flag;
-		int counter;
-		int color;
-		int state;
-		int time;
-		int fx;
-		int num;
-		double angle;
-
+class bullet: public object{
+public:
+	bullet();
+	void reset(float x, float y);
+	void prepare(int dirx, int diry, float spex, float spey);
+	void checkCollision(object &ob);
 };
+#endif

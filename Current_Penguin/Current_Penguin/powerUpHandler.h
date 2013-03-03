@@ -20,6 +20,7 @@ public:
 	void modifySpeedAttribute(penguin p);
 	void checkHealthCollision(penguin &obj);
 	void checkSpeedCollision(penguin &obj);
+	bool checkCollision(bullet bul[]);
 
 private:
 	healthPowerUp health[NUM_OBSTACLES];
