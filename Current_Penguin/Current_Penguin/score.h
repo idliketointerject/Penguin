@@ -2,6 +2,9 @@
 #define SCORE_H
 #include "Object.h"
 #include <allegro5/allegro_font.h>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 class scorekeeper{
 public:
@@ -28,6 +31,13 @@ public:
 	ALLEGRO_FONT * getFont(){
 		return font24;
 	}
+
+	void saveScore();
+
+	int* loadHighScores();
+	int lowestScore(int* scores, int size);
+	void sortScores(int* highscores, int size);
+
 private:
 	int score;
 	ALLEGRO_FONT* font24;

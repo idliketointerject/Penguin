@@ -119,6 +119,8 @@ int main(int argc, char **argv)
 		{
 			if (handler.getKey(KEY_SPACE) && ( state == TITLE || state == ENDGAME ) )
 			{
+				totalScore.setscore(0);
+				pengii.setLives(3);
 				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
 				// This needs to be changed eventually to reset the game before resuming it
 				state = PLAYING;
@@ -152,6 +154,7 @@ int main(int argc, char **argv)
 				// Verify that penguin still has remaining lives
 				if (pengii.getLives() <= 0 )
 				{
+					totalScore.saveScore();
 					state = ENDGAME;
 				}
 				
