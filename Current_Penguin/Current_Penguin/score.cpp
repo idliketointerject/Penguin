@@ -77,3 +77,43 @@ void scorekeeper::sortScores(int* highscores, int size){
 	}
 
 }
+
+
+void scorekeeper::printHighScores() {
+	ALLEGRO_FONT* font = al_load_font("comic_zine_ot.otf",48,0);
+	
+
+	int* highscores = loadHighScores();
+	int yourscore = getscore();
+
+	bool found = false;
+
+	if(yourscore > highscores[0])
+	{
+		al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 - 125, 0, "NEW RECORD! %i", yourscore);
+	}
+	else
+	{
+		for(int i = 1; i < 5; i++)
+		{
+			if(yourscore > highscores[i])
+			{
+				al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 - 125, 0, "HIGH SCORE! %i", yourscore);
+				found = true;
+				break;
+			}
+		}
+	}
+
+	if(!found)
+	{
+		al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 - 125, 0, "Your score: %i", yourscore);
+	}
+
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 - 50, 0, "%s", "Highscores!!");
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2, 0, "1) %i", highscores[0]);
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 + 50, 0, "2) %i", highscores[1]);
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 + 100, 0, "3) %i", highscores[2]);
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 + 150, 0, "4) %i", highscores[3]);
+	al_draw_textf(font,al_map_rgb(0,0,195),WIDTH/2 - 50, HEIGHT/2 + 200, 0, "5) %i", highscores[4]);
+}

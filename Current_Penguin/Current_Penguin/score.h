@@ -32,6 +32,8 @@ public:
 		return font24;
 	}
 
+	void printHighScores();
+
 	void saveScore();
 
 	int* loadHighScores();

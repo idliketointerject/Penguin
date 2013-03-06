@@ -18,3 +18,4 @@ screenprinter::~screenprinter(){
 void screenprinter::printText(char* message){
 	al_draw_textf(getFontPointer(),al_map_rgb(255,255,255),getXPos(), getYPos(), 0, "%s", message);
 }
+

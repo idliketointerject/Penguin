@@ -189,6 +189,7 @@ int main(int argc, char **argv)
 			{
 				// Display Endgame Menu
 				endMenu.drawScaled();
+				totalScore.printHighScores();
 			}
 			else if(state == PLAYING)
 			{
