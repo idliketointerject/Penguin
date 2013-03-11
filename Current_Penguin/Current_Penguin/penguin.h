@@ -2,6 +2,7 @@
 #define PENGUIN_H
 #include "Object.h"
 #include "bullet.h"
+//#include "enmBullet.h"
 
 class penguin: public object{
 public:
@@ -15,7 +16,7 @@ public:
 	int getLives(){return lives;};
 	void spawnBullet();
 	void updateBullets();
-	bullet * getBulletArray() {return bullets;}
+	bullet * getBulletArray() {return bullets;};
 private:
 	int lives;
 	bullet bullets[NUM_BULLETS];

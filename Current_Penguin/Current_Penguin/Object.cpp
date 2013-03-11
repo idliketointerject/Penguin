@@ -41,6 +41,8 @@ void object::initAllToZero()
 	setBoundY(0);
 	setAlive(false);
 	setCollidable(false);
+	setSpeed(0);
+	setAngle(0);
 }
 
 void object::setValuesFromBitmap()
@@ -48,8 +50,8 @@ void object::setValuesFromBitmap()
 	bitmapHeight = al_get_bitmap_height(wBitmap.getBitmapPointer());
 	bitmapWidth = al_get_bitmap_width(wBitmap.getBitmapPointer());
 	// for now also set bounding boxes
-	boundX = bitmapWidth;
-	boundY = bitmapHeight;
+	boundX = bitmapWidth/2;
+	boundY = bitmapHeight/2;
 }
 
 bool object::setImage(char *path)
@@ -81,6 +83,8 @@ void object::update()
 {
 	x += speedX * dirX;
 	y += speedY * dirY;
+	x += cos(angle)*speed;
+	y += sin(angle)*speed;
 }
 
 bool object::checkCollision(object &obj)

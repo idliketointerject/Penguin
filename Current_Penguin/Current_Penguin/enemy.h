@@ -1,10 +1,16 @@
+#ifndef ENEMY_H
+#define ENEMY_H
+
 #include "obstacle.h"
+#include "penguin.h"
+#include "enmBullet.h"
 #include "initgame.h"
 #include "Globals.h"
 #include "Utility.h"
 
 #define MAX_ENEMIES 5
 #define ENEMY_PATTERN_MAX 9
+#define SHOT_MAX 4
 
 class Enemy : public object{
 	public:
@@ -19,12 +25,17 @@ class Enemy : public object{
 		void enemy_pattern7(int i);
 		void enemy_pattern8(int i);
 		void enemy_enter(int i);		//resets and initializes enemy information to spawn in a new wave
-		void enemy_act(int i, int rand);         //logic to call in main event loop
-		void fire();
+		void enemy_act(int i, int rand, penguin &obj);         //logic to call in main event loop
+		void fire(int i);
+		void draw();
 		int flagUp(){return flag;};
 		void setFlag(int n){flag = n;};
 		int getCounter(){return counter;};
 		void setCounter(int cnt){counter = cnt;};
+		bool checkCollision(penguin &obj);
+		bool checkCollision(bullet bul[]);
+		bool checkBulletCollision(bullet &bul);
+		EnmBullet * getEnmBulletArray() {return bullets;}
 	private:
 		int flag;			//1 if enemy is active, 0 if not on screen. Only enemies with flag == 1 are drawn by draw_enemies()
 		int counter;		//time elapsed since enemy spawned
@@ -32,10 +43,10 @@ class Enemy : public object{
 		int hp_max;
 		int item;			//what item the enemy drops
 		int bullet_time;	//when enemy should start firing
-		double speed;
-		double angle;
+		EnmBullet bullets[SHOT_MAX];
 };
 
 typedef  void (Enemy::*EnemMemFn)(int i);
-void enemies_logic(Enemy enemy[]);
-double randAng(double ang);
+void enemies_logic(Enemy enemy[], penguin &obj);
+
+#endif

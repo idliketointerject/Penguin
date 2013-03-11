@@ -15,6 +15,7 @@
     <ClInclude Include="bullet.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enmBullet.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="initAllegro.h" />
@@ -37,6 +38,7 @@
     <ClCompile Include="backGround.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enmBullet.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="initAllegro.cpp" />
     <ClCompile Include="initgame.cpp" />

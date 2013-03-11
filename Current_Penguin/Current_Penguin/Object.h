@@ -43,6 +43,8 @@ public:
 	void setSpeedY(float speedY) {object::speedY = speedY;}
 	void setDirX(int dirX) {object::dirX = dirX;}
 	void setDirY(int dirY) {object::dirY = dirY;}
+	void setSpeed(double speed) {object::speed = speed;}
+	void setAngle(double angle) {object::angle = angle;}
 	void setBoundX(int boundX) {object::boundX = boundX;}
 	void setBoundY(int boundY) {object::boundY = boundY;}
 	void setAlive(bool alive) {object::alive = alive;}
@@ -63,6 +65,8 @@ protected:
 	float speedY;
 	int dirX;
 	int dirY;
+	double speed;
+	double angle;
 	int boundX;
 	int boundY;
 	bitmapWrapper wBitmap;

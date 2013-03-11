@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 	backGround bg("resources/images/background.png");
 	if (!bg.verifyBitmap())
 		return -8;
-	bg.setSpeedX(3);
+	bg.setSpeedX(5);
 	bg.setDirX(-1);
 
 	// Menu Object
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 	// SoundManager
 	soundManager sManager;
-	if( !sManager.setBGMusic("resources/audio/bgm1.wav"))
+	if( !sManager.setBGMusic("resources/audio/rainbow_road.wav"))
 		return -3;
 	if( !sManager.setTitleMusic("resources/audio/menu_bgm.wav"))
 		return -3;
@@ -141,6 +141,8 @@ int main(int argc, char **argv)
 				
 				// Check/Handle Object Collisions
 				obstacHandler.checkCollision(pengii);
+				for (int i=0; i<MAX_ENEMIES; i++)
+					enm[i].checkCollision(pengii);
 
 				//check powerup collisions
 				healthPower.checkHealthCollision(pengii);
@@ -150,6 +152,8 @@ int main(int argc, char **argv)
 				obstacHandler.checkCollision(pengii.getBulletArray());
 				healthPower.checkCollision(pengii.getBulletArray());
 				speedPower.checkCollision(pengii.getBulletArray());
+				for (int i=0; i<MAX_ENEMIES; i++)
+					enm[i].checkCollision(pengii.getBulletArray());
 
 				// Verify that penguin still has remaining lives
 				if (pengii.getLives() <= 0 )
@@ -165,7 +169,7 @@ int main(int argc, char **argv)
 
 				// here we update/spawn obstacles
 				obstacHandler.update();
-				enemies_logic(enm);
+				enemies_logic(enm, pengii);
 				healthPower.update();
 				speedPower.update();
 
@@ -203,10 +207,8 @@ int main(int argc, char **argv)
 				healthPower.draw();
 				speedPower.draw();
 				// Draw Enemies
-				for (int i=0; i<MAX_ENEMIES; i++){
-					if(enm[i].flagUp() == 1)			//check which enemies are active
-						enm[i].draw();
-				}
+				for (int i=0; i<MAX_ENEMIES; i++)
+					enm[i].draw();
 			}
 
 			// Flip buffers

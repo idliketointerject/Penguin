@@ -15,7 +15,6 @@ penguin::penguin(char *bitmapPath) : object(bitmapPath)
 	{
 		bullets[i].setImage("resources/images/bullet.png");
 	}
-	
 }
 
 void penguin::setLives(int lives)
