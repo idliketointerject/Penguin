@@ -1,8 +1,8 @@
 #pragma once
 
 // Display Constants
-const int WIDTH = 1000;
-const int HEIGHT = 600;
+const int WIDTH = 1280;
+const int HEIGHT = 700;
 const int FPS = 60;
 const float PI = 3.14;
 

@@ -15,6 +15,22 @@ obstacleHandler::obstacleHandler(char *bitmapPath)
 	}
 }
 
+void obstacleHandler::reset()
+{
+	for( int i = 0; i < NUM_OBSTACLES; i++)
+	{
+		obstacles[i].reset();
+	}
+}
+
+void obstacleHandler::updateSpawn()
+{
+	for( int i = 0; i < NUM_OBSTACLES; i++)
+	{
+		obstacles[i].updateSpawn();
+	}
+}
+
 void obstacleHandler::update()
 {
 	for( int i = 0; i < NUM_OBSTACLES; i++ )

@@ -11,6 +11,18 @@ obstacle::obstacle(char * bitmapPath) : object(bitmapPath)
 	setSpawnConstant(DEFAULTSPAWN);
 }
 
+void obstacle::reset()
+{
+	setSpawnConstant(DEFAULTSPAWN);
+	setAlive(false);
+}
+
+void obstacle::updateSpawn()
+{
+	if(spawnConstant > 4)
+		spawnConstant--;
+}
+
 void obstacle::randYSpawn(int speed)
 {
 	x = WIDTH;

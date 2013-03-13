@@ -18,6 +18,15 @@ void powerUpHandler::update()
 	}
 }
 
+void powerUpHandler::reset()
+{
+	for( int i = 0; i < NUM_OBSTACLES; i++)
+	{
+		health[i].reset();
+		speed[i].reset();
+	}
+}
+
 void powerUpHandler::draw()
 {
 	for( int i = 0; i < NUM_OBSTACLES; i++ )

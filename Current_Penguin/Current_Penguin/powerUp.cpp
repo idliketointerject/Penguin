@@ -19,6 +19,18 @@ void healthPowerUp::modifyAttributes(penguin p, obstacleHandler x){
 	}
 }
 
+void healthPowerUp::reset()
+{
+	setAlive(false);
+
+}
+
+void speedPowerUp::reset()
+{
+	setAlive(false);
+}
+
+
 
 speedPowerUp::speedPowerUp(): obstacle()
 {

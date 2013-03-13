@@ -17,6 +17,15 @@ penguin::penguin(char *bitmapPath) : object(bitmapPath)
 	}
 }
 
+void penguin::reset()
+{
+	setLives(3);
+	setX(0);
+	setY(0);
+	setSpeedX(10.0);
+	setSpeedY(10.0);
+}
+
 void penguin::setLives(int lives)
 {
 	penguin::lives = lives;

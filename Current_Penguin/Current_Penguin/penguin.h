@@ -17,6 +17,8 @@ public:
 	void spawnBullet();
 	void updateBullets();
 	bullet * getBulletArray() {return bullets;};
+	void reset();
+
 private:
 	int lives;
 	bullet bullets[NUM_BULLETS];

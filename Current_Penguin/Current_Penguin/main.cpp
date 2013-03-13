@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 	// SoundManager
 	soundManager sManager;
-	if( !sManager.setBGMusic("resources/audio/rainbow_road.wav"))
+	if( !sManager.setBGMusic("resources/audio/aqua_star.wav"))
 		return -3;
 	if( !sManager.setTitleMusic("resources/audio/menu_bgm.wav"))
 		return -3;
@@ -74,6 +74,7 @@ int main(int argc, char **argv)
 		return -4;
 	pengii.setSpeedX( 10.0 );
 	pengii.setSpeedY( 10.0 );
+	pengii.setLives(3);
 	pengii.setCollidable(true);
 	pengii.setAlive(true);
 
@@ -120,8 +121,10 @@ int main(int argc, char **argv)
 			if (handler.getKey(KEY_SPACE) && ( state == TITLE || state == ENDGAME ) )
 			{
 				totalScore.setscore(0);
-				pengii.setLives(3);
-				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
+				pengii.reset();
+				obstacHandler.reset();
+				healthPower.reset();
+				speedPower.reset();				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
 				// This needs to be changed eventually to reset the game before resuming it
 				state = PLAYING;
 				handler.changeKey(KEY_SPACE);
@@ -173,7 +176,11 @@ int main(int argc, char **argv)
 				healthPower.update();
 				speedPower.update();
 
-
+				//update new obstacle spawnconstant
+				if(totalScore.getscore() % 10 == 0)
+				{
+					obstacHandler.updateSpawn();
+				}
 			}
 		}
 

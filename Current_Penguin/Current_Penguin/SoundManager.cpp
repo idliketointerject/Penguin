@@ -48,6 +48,7 @@ void soundManager::update(int state)
 		else if ( state = ENDGAME )
 		{
 			//play endgame music
+			loopTitleMusic();
 		}
 	}
 }

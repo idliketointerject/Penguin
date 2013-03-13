@@ -18,6 +18,8 @@ public:
 	void draw();
 	bool verifyBitmaps();
 	void drawBoundingBoxes();
+	void updateSpawn();
+	void reset();
 
 private:
 	obstacle obstacles[NUM_OBSTACLES];

@@ -11,6 +11,8 @@ public:
 	//void setSpawnProb(int value);
 	//int getSpawnProb() {return spawnProb;}
 	void modifyAttributes(penguin p, obstacleHandler x);
+	void reset();
+
 private:
 	int lifeModifier;
 	//int spawnProb;
@@ -24,6 +26,8 @@ public:
 	//void setSpawnProb(int value);
 	//int getSpawnProb() {return spawnProb;}
 	void modifyAttributes();
+	void reset();
+
 private:
 	float speedMod;
 	//int spawnProb;

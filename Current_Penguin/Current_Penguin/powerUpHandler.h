@@ -21,6 +21,7 @@ public:
 	void checkHealthCollision(penguin &obj);
 	void checkSpeedCollision(penguin &obj);
 	bool checkCollision(bullet bul[]);
+	void reset();
 
 private:
 	healthPowerUp health[NUM_OBSTACLES];
