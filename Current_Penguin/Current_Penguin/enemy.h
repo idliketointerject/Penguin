@@ -10,7 +10,7 @@
 
 #define MAX_ENEMIES 5
 #define ENEMY_PATTERN_MAX 9
-#define SHOT_MAX 4
+#define SHOT_MAX 5
 
 class Enemy : public object{
 	public:
@@ -24,7 +24,7 @@ class Enemy : public object{
 		void enemy_pattern6(int i);
 		void enemy_pattern7(int i);
 		void enemy_pattern8(int i);
-		void enemy_enter(int i);		//resets and initializes enemy information to spawn in a new wave
+		void enemy_enter(int i, int rand);		//resets and initializes enemy information to spawn in a new wave
 		void enemy_act(int i, int rand, penguin &obj);         //logic to call in main event loop
 		void fire(int i);
 		void draw();
@@ -37,6 +37,7 @@ class Enemy : public object{
 		bool checkBulletCollision(bullet &bul);
 		void collision();
 		void reset();
+		void increaseDifficulty();
 		EnmBullet * getEnmBulletArray() {return bullets;}
 	private:
 		int flag;			//1 if enemy is active, 0 if not on screen. Only enemies with flag == 1 are drawn by draw_enemies()
@@ -45,10 +46,12 @@ class Enemy : public object{
 		int hp_max;
 		int item;			//what item the enemy drops
 		int bullet_time;	//when enemy should start firing
+		int difficulty;
 		EnmBullet bullets[SHOT_MAX];
 };
 
 typedef  void (Enemy::*EnemMemFn)(int i);
 void enemies_logic(Enemy enemy[], penguin &obj);
+bool allDead(Enemy enemy[]);
 
 #endif

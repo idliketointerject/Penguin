@@ -4,7 +4,7 @@ Enemy::Enemy(){
 	setImage("resources/images/blowfish.png");
 	flag = 1;
 	counter = 0;
-	hp = 100;
+	hp = 2;
 	hp_max = hp;
 	bullet_time = 100;
 	dirX = 1;
@@ -112,20 +112,21 @@ void Enemy::enemy_pattern8(int i){
             speed=6+randAng(2);
             angle=randAng(PI/4)+PI*r;
         }
-        speed=2;
+        speed=3;
     }
     if(t >= 100 + 30*i){
         speedX += 0.05;
     }
 }
 
-void Enemy::enemy_enter(int i){
+void Enemy::enemy_enter(int i, int random){
 	if(counter == 0){
-		hp = 100;
-		hp_max = hp;
+		hp = hp_max;
 		x = WIDTH;
-		//y = (HEIGHT/6) * (i + 1) - 50;
-		y = HEIGHT/2 - 50;
+		if(random >= 0 && random <= 2)
+			y = (HEIGHT/6) * (i + 1) - 50;
+		else
+			y = HEIGHT/2 - 50;
 		bullet_time = 100;
 		speedX = 0;
 		speedY = 0;
@@ -147,28 +148,22 @@ void Enemy::enemy_act(int i, int random, penguin &obj){
 		if(counter == bullet_time + 20*i)   //check whether it's time to fire bullets
 			fire(i);		//it's bullet time
 	}
-	for(int j = 0; j < SHOT_MAX; j++)
+	for(int j = 0; j < SHOT_MAX - (3-difficulty); j++)
 			bullets[j].logic(j, obj);
 }
 
 void Enemy::fire(int i){
-	for(int j = 0; j < SHOT_MAX; j++){
+	for(int j = 0; j < SHOT_MAX - (3-difficulty); j++){
 		//bullets[j].setFlag(1);
 		bullets[j].enter(x+float(bitmapWidth)/2, y+float(bitmapHeight)/2);
         bullets[j].setNum(i);	//num = which enemy bullet came from
-		/*	shot[n].bullet[k].flag  =1;
-			shot[n].bullet[k].x     =enemy[shot[n].num].x;
-			shot[n].bullet[k].y     =enemy[shot[n].num].y;
-			shot[n].bullet[k].col   =enemy[shot[n].num].col;
-			shot[n].bullet[k].cnt   =0;
-			shot[n].bullet[k].spd   =3;*/
     }
 }
 
 void Enemy::draw(){
 	if(flag)
 		object::draw();
-	for(int i=0; i<SHOT_MAX; i++){
+	for(int i=0; i<SHOT_MAX - (3-difficulty); i++){
 		if(bullets[i].flagUp())
 			al_draw_bitmap(bullets[i].getImage(), bullets[i].getX(), bullets[i].getY(), 0);
 	}
@@ -207,8 +202,6 @@ bool Enemy::checkCollision(bullet bul[])
 			if(checkBulletCollision(bul[i]))
 			{
 				collision();
-				flag = 0;
-				counter = 0;
 				bul[i].collision();
 				check = true;
 			}
@@ -230,10 +223,6 @@ bool Enemy::checkBulletCollision(bullet &bul)
 		y + boundY - 1 > bul.getY() 
 	   )
 	{
-	//	collision();
-		//flag = 0;
-	//	counter = 0;
-	//	bul.collision();
 		return true;
 	}
 
@@ -242,13 +231,13 @@ bool Enemy::checkBulletCollision(bullet &bul)
 
 void Enemy::collision()
 {
-	object::collision();
-	/*
-	for( int i = 0; i < SHOT_MAX; i++)
+	hp--;
+	if (hp == 0)
 	{
-		bullets[i].setFlag(0);
+		object::collision();
+		flag = 0;
+		counter = 0;
 	}
-	*/
 }
 
 void Enemy::reset()
@@ -258,19 +247,34 @@ void Enemy::reset()
 	{
 		bullets[i].setFlag(0);
 	}
+	difficulty = 0;
 }
 
-int random = 8;
+void Enemy::increaseDifficulty()
+{
+	if(difficulty < 3)
+		difficulty = difficulty + 1;
+}
+
+int random;
 void enemies_logic(Enemy enemy[], penguin &obj){
-	if (enemy[4].flagUp() == 0){
-		random = randInt(0, ENEMY_PATTERN_MAX-1);
+	if (allDead(enemy)){           //if the previous wave is dead, reset them to spawn in a new wave
+		random = randInt(0, ENEMY_PATTERN_MAX);    //select a random movement pattern for the new wave
 		for (int i=0; i<MAX_ENEMIES; i++){
 			enemy[i].setCounter(0);
 			enemy[i].setFlag(1);
 		}
 	}
 	for (int i=0; i<MAX_ENEMIES; i++){
-		enemy[i].enemy_enter(i);
+		enemy[i].enemy_enter(i, random);
 		enemy[i].enemy_act(i, random, obj);
 	}
+}
+
+bool allDead(Enemy enemy[]){
+	for (int i=0; i<MAX_ENEMIES; i++){
+		if(enemy[i].flagUp())
+			return false;
+	}
+	return true;
 }

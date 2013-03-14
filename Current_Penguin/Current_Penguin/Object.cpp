@@ -50,8 +50,8 @@ void object::setValuesFromBitmap()
 	bitmapHeight = al_get_bitmap_height(wBitmap.getBitmapPointer());
 	bitmapWidth = al_get_bitmap_width(wBitmap.getBitmapPointer());
 	// for now also set bounding boxes
-	boundX = bitmapWidth;
-	boundY = bitmapHeight;
+	boundX = bitmapWidth*0.9;
+	boundY = bitmapHeight*0.7;
 }
 
 bool object::setImage(char *path)

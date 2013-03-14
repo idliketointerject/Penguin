@@ -204,6 +204,14 @@ int main(int argc, char **argv)
 				enemies_logic(enm, pengii);
 				healthPower.update();
 				speedPower.update();
+				if(totalScore.getscore() % 600 == 0) //every 600 frames (10 seconds), increase difficulty (0 to 3)
+				{
+					for (int i=0; i<MAX_ENEMIES; i++)
+					{
+						enm[i].increaseDifficulty();
+					}
+				}
+					
 
 				//update new obstacle spawnconstant
 				if(totalScore.getscore() % 10 == 0)
