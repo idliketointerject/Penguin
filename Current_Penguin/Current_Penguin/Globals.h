@@ -10,8 +10,8 @@ const float PI = 3.14;
 const int NUM_SAMPLES = 2;
 
 // Enumerations
-enum KEYS { KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_SPACE };
-enum STATE { TITLE, PLAYING, ENDGAME };
+enum KEYS { KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_ENTER };
+enum STATE { TITLE, PLAYING, HELP, ENDGAME };
 
 // Game Constants
 const int NUM_ENEMIES = 5;

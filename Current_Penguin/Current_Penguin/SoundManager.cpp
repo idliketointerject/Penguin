@@ -37,7 +37,7 @@ void soundManager::update(int state)
 	{
 		al_stop_samples();
 		currentState = state;
-		if ( state == TITLE )
+		if ( state == TITLE || state == HELP )
 		{
 			loopTitleMusic();
 		}
@@ -45,7 +45,7 @@ void soundManager::update(int state)
 		{
 			loopBGMusic();
 		}
-		else if ( state = ENDGAME )
+		else if ( state == ENDGAME )
 		{
 			//play endgame music
 			loopTitleMusic();

@@ -3,7 +3,7 @@
 #include "initAllegro.h"
 #include "wrappers.h"
 
-#define NUM_KEYS 5
+#define NUM_KEYS 6
 
 class inputHandler
 {

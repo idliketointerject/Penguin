@@ -54,6 +54,10 @@ int main(int argc, char **argv)
 	backGround startMenu("resources/images/menu.png");
 	if(!startMenu.verifyBitmap())
 		return -2;
+
+	backGround howtoPlay("resources/images/howtoplay.png");
+	if(!startMenu.verifyBitmap())
+		return -2;
 	
 	//endgame object
 	backGround endMenu("resources/images/end.png");
@@ -118,7 +122,7 @@ int main(int argc, char **argv)
 		handler.waitForEvent();
 		if (handler.handleEvent())
 		{
-			if (handler.getKey(KEY_SPACE) && ( state == TITLE || state == ENDGAME ) )
+			if (handler.getKey(KEY_SPACE) && ( state == TITLE ) )
 			{
 				totalScore.setscore(0);
 				pengii.reset();
@@ -128,6 +132,27 @@ int main(int argc, char **argv)
 				// This needs to be changed eventually to reset the game before resuming it
 				state = PLAYING;
 				handler.changeKey(KEY_SPACE);
+			}
+			else if (handler.getKey(KEY_SPACE) && (state == HELP))
+			{
+				state = TITLE;
+				handler.changeKey(KEY_SPACE);
+			}
+			else if(handler.getKey(KEY_ENTER) && (state == ENDGAME))
+			{
+				totalScore.setscore(0);
+				pengii.reset();
+				obstacHandler.reset();
+				healthPower.reset();
+				speedPower.reset();				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
+				// This needs to be changed eventually to reset the game before resuming it
+				state = PLAYING;
+				handler.changeKey(KEY_ENTER);
+			}
+			else if(handler.getKey(KEY_ENTER) && (state == TITLE))
+			{
+				state = HELP;
+				handler.changeKey(KEY_ENTER);
 			}
 		}
 		else if(handler.doUpdate()) // UPDATE GAME
@@ -184,8 +209,6 @@ int main(int argc, char **argv)
 		}
 
 
-
-
 		if (render && handler.isEmpty())
 		{
 			render = false;
@@ -194,6 +217,10 @@ int main(int argc, char **argv)
 				// Display TitleMenu!
 				startMenu.drawScaled();
 
+			}
+			else if(state == HELP)
+			{
+				howtoPlay.drawScaled();
 			}
 			else if(state == ENDGAME)
 			{

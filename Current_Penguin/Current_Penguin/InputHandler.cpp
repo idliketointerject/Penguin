@@ -50,6 +50,9 @@ bool inputHandler::handleEvent()
 		case ALLEGRO_KEY_SPACE:
 			keys[KEY_SPACE] = true;
 			break;
+		case ALLEGRO_KEY_ENTER:
+			keys[KEY_ENTER] = true;
+			break;
 		case ALLEGRO_KEY_ESCAPE:
 			done = true;
 			break;
@@ -74,6 +77,9 @@ bool inputHandler::handleEvent()
 			break;
 		case ALLEGRO_KEY_SPACE:
 			keys[KEY_SPACE] = false;
+			break;
+		case ALLEGRO_KEY_ENTER:
+			keys[KEY_ENTER] = false;
 			break;
 		}
 		return true;
