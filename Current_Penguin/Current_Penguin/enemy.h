@@ -35,6 +35,8 @@ class Enemy : public object{
 		bool checkCollision(penguin &obj);
 		bool checkCollision(bullet bul[]);
 		bool checkBulletCollision(bullet &bul);
+		void collision();
+		void reset();
 		EnmBullet * getEnmBulletArray() {return bullets;}
 	private:
 		int flag;			//1 if enemy is active, 0 if not on screen. Only enemies with flag == 1 are drawn by draw_enemies()

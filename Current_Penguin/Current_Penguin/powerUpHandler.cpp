@@ -32,7 +32,9 @@ void powerUpHandler::draw()
 	for( int i = 0; i < NUM_OBSTACLES; i++ )
 	{
 		if (health[i].isAlive())
+		{
 			health[i].draw();
+		}
 	}
 }
 

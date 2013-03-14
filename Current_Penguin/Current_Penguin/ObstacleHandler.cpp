@@ -44,7 +44,10 @@ void obstacleHandler::draw()
 	for( int i = 0; i < NUM_OBSTACLES; i++ )
 	{
 		if (obstacles[i].isAlive())
+		{
 			obstacles[i].draw();
+		}
+		
 	}
 }
 

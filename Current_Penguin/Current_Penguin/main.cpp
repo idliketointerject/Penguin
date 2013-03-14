@@ -54,9 +54,10 @@ int main(int argc, char **argv)
 	backGround startMenu("resources/images/menu.png");
 	if(!startMenu.verifyBitmap())
 		return -2;
-
+		
+	//HelpMenu object
 	backGround howtoPlay("resources/images/howtoplay.png");
-	if(!startMenu.verifyBitmap())
+	if(!howtoPlay.verifyBitmap())
 		return -2;
 	
 	//endgame object
@@ -128,12 +129,15 @@ int main(int argc, char **argv)
 				pengii.reset();
 				obstacHandler.reset();
 				healthPower.reset();
-				speedPower.reset();				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
+				speedPower.reset();				
+				for (int i=0; i<MAX_ENEMIES; i++)
+					enm[i].reset();
+				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
 				// This needs to be changed eventually to reset the game before resuming it
 				state = PLAYING;
 				handler.changeKey(KEY_SPACE);
 			}
-			else if (handler.getKey(KEY_SPACE) && (state == HELP))
+			else if ( handler.getKey(KEY_SPACE) && (state == HELP))
 			{
 				state = TITLE;
 				handler.changeKey(KEY_SPACE);
@@ -144,12 +148,13 @@ int main(int argc, char **argv)
 				pengii.reset();
 				obstacHandler.reset();
 				healthPower.reset();
-				speedPower.reset();				// If spacebar is pressed in title screen/endgame screen the game will revert to playing
-				// This needs to be changed eventually to reset the game before resuming it
+				speedPower.reset();				
+				for (int i=0; i<MAX_ENEMIES; i++)
+					enm[i].reset();
 				state = PLAYING;
 				handler.changeKey(KEY_ENTER);
 			}
-			else if(handler.getKey(KEY_ENTER) && (state == TITLE))
+			else if(handler.getKey(KEY_ENTER) && (state == TITLE) )
 			{
 				state = HELP;
 				handler.changeKey(KEY_ENTER);
@@ -209,6 +214,8 @@ int main(int argc, char **argv)
 		}
 
 
+
+
 		if (render && handler.isEmpty())
 		{
 			render = false;
@@ -241,9 +248,10 @@ int main(int argc, char **argv)
 				speedPower.draw();
 				// Draw Enemies
 				for (int i=0; i<MAX_ENEMIES; i++)
+				{
 					enm[i].draw();
+				}
 			}
-
 			// Flip buffers
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));

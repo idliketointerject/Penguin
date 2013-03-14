@@ -146,9 +146,9 @@ void Enemy::enemy_act(int i, int random, penguin &obj){
 		}
 		if(counter == bullet_time + 20*i)   //check whether it's time to fire bullets
 			fire(i);		//it's bullet time
-		for(int j = 0; j < SHOT_MAX; j++)
-			bullets[j].logic(j, obj);
 	}
+	for(int j = 0; j < SHOT_MAX; j++)
+			bullets[j].logic(j, obj);
 }
 
 void Enemy::fire(int i){
@@ -238,6 +238,26 @@ bool Enemy::checkBulletCollision(bullet &bul)
 	}
 
 	return false;
+}
+
+void Enemy::collision()
+{
+	object::collision();
+	/*
+	for( int i = 0; i < SHOT_MAX; i++)
+	{
+		bullets[i].setFlag(0);
+	}
+	*/
+}
+
+void Enemy::reset()
+{
+	setFlag(0);
+	for ( int i = 0; i < SHOT_MAX; i++)
+	{
+		bullets[i].setFlag(0);
+	}
 }
 
 int random = 8;

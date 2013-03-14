@@ -73,7 +73,6 @@ void penguin::move(bool keys[]){
 void penguin::collision()
 {
 	// This function is what occures when any collision happens. Only those responses should go here
-	fprintf(stderr, "%i", getLives());
 }
 
 void penguin::spawnBullet()

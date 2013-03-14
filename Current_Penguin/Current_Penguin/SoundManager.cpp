@@ -33,11 +33,11 @@ void soundManager::update(int state)
 		loopTitleMusic();
 		currentState = TITLE;
 	}
-	else if ( state != currentState )
+	else if ( state != currentState && state != HELP )
 	{
 		al_stop_samples();
 		currentState = state;
-		if ( state == TITLE || state == HELP )
+		if ( state == TITLE )
 		{
 			loopTitleMusic();
 		}

@@ -4,6 +4,8 @@
 object::object()
 {
 	initAllToZero();
+	setBoundX(0);
+	setBoundY(0);
 }
 
 object::object(float x, float y, float speedX, float speedY, int dirX, int dirY, int boundX,
@@ -37,8 +39,6 @@ void object::initAllToZero()
 	setSpeedY(0);
 	setDirX(0);
 	setDirY(0);
-	setBoundX(0);
-	setBoundY(0);
 	setAlive(false);
 	setCollidable(false);
 	setSpeed(0);
@@ -50,8 +50,8 @@ void object::setValuesFromBitmap()
 	bitmapHeight = al_get_bitmap_height(wBitmap.getBitmapPointer());
 	bitmapWidth = al_get_bitmap_width(wBitmap.getBitmapPointer());
 	// for now also set bounding boxes
-	boundX = bitmapWidth/2;
-	boundY = bitmapHeight/2;
+	boundX = bitmapWidth;
+	boundY = bitmapHeight;
 }
 
 bool object::setImage(char *path)

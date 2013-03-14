@@ -18,13 +18,16 @@
     <ClInclude Include="backGround.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="wrappers.h">
+    <ClInclude Include="bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enmBullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game.h">
@@ -75,10 +78,7 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enmBullet.h">
+    <ClInclude Include="wrappers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -86,7 +86,13 @@
     <ClCompile Include="backGround.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enmBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game.cpp">
@@ -138,12 +144,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wrappers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="enmBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
