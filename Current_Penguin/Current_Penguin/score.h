@@ -10,14 +10,16 @@ class scorekeeper{
 public:
 
 	scorekeeper(){
-		font24 = NULL;
-		//font24 = al_load_font("Escape.ttf",24,0);
+		//font24 = NULL;
+		font24 = al_load_font("Escape.ttf",24,0);
+		font = al_load_font("comic_zine_ot.otf",48,0);
+
 		score = 0;
 	}
-	void setFont(ALLEGRO_FONT * font)
-	{
-		font24 = font;
-	}
+	//void setFont(ALLEGRO_FONT * font)
+	//{
+		//font24 = font;
+	//}
 	void incrementscore(){
 		++score;
 	}
@@ -43,6 +45,7 @@ public:
 private:
 	int score;
 	ALLEGRO_FONT* font24;
+	ALLEGRO_FONT* font;
 };
 
 #endif

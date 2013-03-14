@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 
 	// ScoreKeeper
 	scorekeeper totalScore;
-	totalScore.setFont( al_load_font("Escape.ttf",24,0) );
+	//totalScore.setFont( al_load_font("Escape.ttf",24,0) );
 	if( !totalScore.getFont())
 		return -5;
 
@@ -137,7 +137,6 @@ int main(int argc, char **argv)
 
 			if( state == PLAYING )
 			{
-				
 				// Update BackGround
 				bg.update();
 				totalScore.incrementscore();

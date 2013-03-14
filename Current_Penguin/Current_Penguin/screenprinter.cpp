@@ -4,15 +4,16 @@ screenprinter::screenprinter(char* name){
 	setXPos(WIDTH/2);
 	setYPos(HEIGHT/2);
 	fontName = name;
+	fontPointer = al_load_font(fontName,getTextSize(),0);
+
 }
 ALLEGRO_FONT* screenprinter::getFontPointer(){
-	fontPointer = al_load_font(fontName,getTextSize(),0);
 	return fontPointer;
 }
 screenprinter::~screenprinter(){
 	if( fontPointer )
 	{
-//		al_destroy_font(fontPointer);
+		al_destroy_font(fontPointer);
 	}
 }
 void screenprinter::printText(char* message){

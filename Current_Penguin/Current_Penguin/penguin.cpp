@@ -21,7 +21,7 @@ void penguin::reset()
 {
 	setLives(3);
 	setX(0);
-	setY(0);
+	setY(HEIGHT/2 + bitmapHeight /2);
 	setSpeedX(10.0);
 	setSpeedY(10.0);
 }

@@ -80,7 +80,6 @@ void scorekeeper::sortScores(int* highscores, int size){
 
 
 void scorekeeper::printHighScores() {
-	ALLEGRO_FONT* font = al_load_font("comic_zine_ot.otf",48,0);
 	
 
 	int* highscores = loadHighScores();
